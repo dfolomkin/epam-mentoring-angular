@@ -1,19 +1,19 @@
 <div class="course-card">
   <div class="course-card__data">
     <div class="course-card__title">
-      <h3>{{ courseData.title }}</h3>
+      <h3>{{ course.title }}</h3>
       <div class="course-card__datetime-info">
-        <div>{{ courseData.duration }}</div>
-        <div>{{ courseData.date }}</div>
+        <div>{{ course.duration }}</div>
+        <div>{{ course.date }}</div>
       </div>
     </div>
-    <div class="course-card__description">{{ courseData.description }}</div>
+    <div class="course-card__description">{{ course.description }}</div>
   </div>
   <div class="course-card__control">
     <button class="btn waves-effect waves-light">
-      Add <i class="material-icons left">add</i>
+      Edit <i class="material-icons left">edit</i>
     </button>
-    <button class="btn waves-effect waves-light">
+    <button class="btn waves-effect waves-light" (click)="onDeleteClick()">
       Delete <i class="material-icons left">delete</i>
     </button>
   </div>

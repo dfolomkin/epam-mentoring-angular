@@ -1,3 +1,11 @@
-<p>
-  search works!
-</p>
+<div class="search-bar">
+  <input
+    placeholder="Search"
+    type="text"
+    class="validate"
+    [(ngModel)]="searchString"
+  />
+  <button class="btn waves-effect waves-light" (click)="onSearchClick()">
+    Search <i class="material-icons left">search</i>
+  </button>
+</div>
