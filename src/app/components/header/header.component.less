@@ -1,6 +1,20 @@
 @import '../../../styles.less';
 
 .header {
-  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 6rem;
   background-color: @main-bg;
+  padding: 0 @gaps;
+  font-size: 1.8rem;
+  color: @clr-white;
+
+  &__logo {
+    font-size: 3rem;
+  }
+
+  &__control {
+    margin-right: @gaps;
+  }
 }

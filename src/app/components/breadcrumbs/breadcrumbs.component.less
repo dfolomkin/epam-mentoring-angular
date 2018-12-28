@@ -1,13 +1,18 @@
+@import '../../../styles.less';
+
 .simple-breadcrumbs {
-  height: 1.8rem;
-  line-height: 1.8rem;
-  background-color: #999;
+  height: 3rem;
+  line-height: 3rem;
+  background-color: @clr-light-violet;
+  margin-bottom: @gaps;
+  padding: 0 @gaps;
+  font-size: 1.6rem;
 
   & a {
-    color: #333;
+    color: @clr-black;
   }
 
   & a.active {
-    color: #fff;
+    color: @clr-white;
   }
 }

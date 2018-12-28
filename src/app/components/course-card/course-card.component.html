@@ -3,8 +3,14 @@
     <div class="course-card__title">
       <h3>{{ course.title }}</h3>
       <div class="course-card__datetime-info">
-        <div>{{ course.duration }}</div>
-        <div>{{ course.date }}</div>
+        <span
+          ><i class="material-icons">access_time</i>
+          {{ course.duration | duration }}</span
+        >
+        <span
+          ><i class="material-icons">date_range</i>
+          {{ course.date | date }}</span
+        >
       </div>
     </div>
     <div class="course-card__description">{{ course.description }}</div>

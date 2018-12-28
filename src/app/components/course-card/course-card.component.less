@@ -1,0 +1,41 @@
+@import '../../../styles.less';
+
+.course-card {
+  display: flex;
+  justify-content: space-between;
+  height: 12rem;
+  margin-bottom: @gaps;
+  padding: @gaps;
+  font-size: 1.6rem;
+  border: 1px solid @clr-light-gray;
+
+  &__data {
+    flex-basis: 1%;
+    flex-grow: 1;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 @gaps 0;
+
+    & h3 {
+      margin: 0;
+      font-size: 2.4rem;
+    }
+  }
+
+  &__datetime-info span {
+    margin-right: @gaps;
+  }
+
+  &__control {
+    width: 12rem;
+
+    & .btn {
+      width: 100%;
+      margin-bottom: 0.8rem;
+    }
+  }
+}

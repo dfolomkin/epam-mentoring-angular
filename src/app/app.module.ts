@@ -13,23 +13,25 @@ import { CoursesListComponent } from './components/courses-list/courses-list.com
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LogoComponent } from './components/logo/logo.component';
-import { SearchComponent } from './components/search/search.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { CoursesFilterPipe } from './components/courses-list/courses-list.pipe';
+import { DurationPipe } from './components/course-card/course-card.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    BreadcrumbsComponent,
-    FooterComponent,
-    ControlBarComponent,
     LogoComponent,
-    CourseCardComponent,
+    BreadcrumbsComponent,
+    ControlBarComponent,
     ButtonComponent,
-    SearchComponent,
+    SearchBarComponent,
     CoursesListComponent,
+    CourseCardComponent,
+    FooterComponent,
     routingComponents,
-    CoursesFilterPipe
+    CoursesFilterPipe,
+    DurationPipe
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [],

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
+
 import { coursesMock, ICourse } from '../commons/constants';
 
 @Component({
