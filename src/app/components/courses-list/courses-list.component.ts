@@ -9,9 +9,7 @@ import { coursesMock, ICourse } from '../commons/constants';
 export class CoursesListComponent implements OnInit, OnChanges {
   courses: ICourse[] = coursesMock;
 
-  constructor() {
-    // this.onClick.bind(this);
-  }
+  constructor() {}
 
   ngOnInit() {
     console.log('OnInit has fired!');

@@ -14,6 +14,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { SearchComponent } from './components/search/search.component';
+import { CoursesFilterPipe } from './components/courses-list/courses-list.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SearchComponent } from './components/search/search.component';
     ButtonComponent,
     SearchComponent,
     CoursesListComponent,
-    routingComponents
+    routingComponents,
+    CoursesFilterPipe
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [],
