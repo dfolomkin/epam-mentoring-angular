@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ICourse } from '../commons/constants';
+import { ICourse } from '../../commons/constants';
 
 @Pipe({ name: 'coursesFilter' })
 export class CoursesFilterPipe implements PipeTransform {

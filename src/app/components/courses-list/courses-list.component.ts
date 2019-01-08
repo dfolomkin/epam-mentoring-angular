@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 
-import { coursesMock, ICourse } from '../commons/constants';
+import { ICourse } from '../../commons/constants';
+import { CoursesListService } from './courses-list.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -8,11 +9,12 @@ import { coursesMock, ICourse } from '../commons/constants';
   styleUrls: ['./courses-list.component.less']
 })
 export class CoursesListComponent implements OnInit, OnChanges {
-  courses: ICourse[] = coursesMock;
+  private courses: ICourse[];
 
-  constructor() {}
+  constructor(private coursesService: CoursesListService) {}
 
   ngOnInit() {
+    this.courses = this.coursesService.getCourses();
     console.log('OnInit has fired!');
   }
 

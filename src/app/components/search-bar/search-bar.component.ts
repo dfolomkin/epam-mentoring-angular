@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-bar.component.less']
 })
 export class SearchBarComponent implements OnInit {
-  searchString: string;
+  private searchString: string;
 
   constructor() {}
 

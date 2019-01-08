@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { CoursesComponent } from './containers/courses/courses.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { CourseEditComponent } from './containers/course-edit/course-edit.component';
 
 const routes: Routes = [
   { path: 'courses', component: CoursesComponent },
-  { path: 'footer', component: FooterComponent },
+  { path: 'course-edit', component: CourseEditComponent },
   { path: '', redirectTo: '/courses', pathMatch: 'full' }
 ];
 
@@ -14,4 +15,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
-export const routingComponents = [CoursesComponent, FooterComponent];
+export const routingComponents = [CoursesComponent, CourseEditComponent];
