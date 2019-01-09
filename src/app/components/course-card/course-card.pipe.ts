@@ -5,6 +5,6 @@ export class DurationPipe implements PipeTransform {
   transform(duration: number) {
     const minCount: number = Math.floor(duration / 60);
     const secCount: number = duration - minCount * 60;
-    return `${minCount} m ${secCount} s`;
+    return `${minCount} h ${secCount} m`;
   }
 }

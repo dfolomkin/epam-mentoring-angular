@@ -2,15 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ControlBarComponent } from './control-bar.component';
 
+import { SearchBarModule } from '../search-bar/search-bar.module';
+
 describe('ControlBarComponent', () => {
   let component: ControlBarComponent;
   let fixture: ComponentFixture<ControlBarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ControlBarComponent ]
-    })
-    .compileComponents();
+      declarations: [ControlBarComponent],
+      imports: [SearchBarModule]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
