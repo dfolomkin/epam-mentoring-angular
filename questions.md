@@ -5,3 +5,9 @@ css for ngComponent
 how to route modules instead of components?
 public or default?
 ngModule providers vs Components providers
+
+how to test interface of object?
+
+test click: fire class method (spyOn(component, 'onClick')) or something in it?
+providedIn: 'root'
+how to override pipes providers? witout mocking full pipe?

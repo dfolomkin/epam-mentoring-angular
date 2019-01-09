@@ -2,11 +2,22 @@ import { TestBed } from '@angular/core/testing';
 
 import { CoursesListService } from './courses-list.service';
 
+import { ICourse } from '../../commons/constants';
+
 describe('CoursesListService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  let service: CoursesListService;
+
+  beforeEach(() => {
+    service = new CoursesListService();
+  });
 
   it('should be created', () => {
-    const service: CoursesListService = TestBed.get(CoursesListService);
     expect(service).toBeTruthy();
+  });
+
+  describe('getCourses()', () => {
+    it('should return array', () => {
+      expect(Array.isArray(service.getCourses())).toBe(true);
+    });
   });
 });

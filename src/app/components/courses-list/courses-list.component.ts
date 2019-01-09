@@ -9,7 +9,7 @@ import { CoursesListService } from './courses-list.service';
   styleUrls: ['./courses-list.component.less']
 })
 export class CoursesListComponent implements OnInit, OnChanges {
-  private courses: ICourse[];
+  courses: ICourse[];
 
   constructor(private coursesService: CoursesListService) {}
 

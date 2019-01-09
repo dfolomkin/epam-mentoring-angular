@@ -39,7 +39,7 @@ describe('AppComponent', () => {
   it('should render div.app-container', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
+    const compiled: HTMLElement = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('.app-container')).toBeTruthy();
   });
 });
