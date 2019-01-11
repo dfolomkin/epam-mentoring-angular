@@ -22,7 +22,7 @@ export class CoursesListComponent implements OnInit, OnChanges {
     console.log('OnChanges has fired!');
   }
 
-  handleChildDelete(id: number) {
+  onChildDelete(id: number) {
     this.courses = this.courses.filter(item => item.id !== id);
     console.log(`Course with id ${id} has been removed`);
   }

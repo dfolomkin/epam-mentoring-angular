@@ -1,55 +1,65 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Pipe, PipeTransform, DebugElement } from '@angular/core';
+import { Component, OnInit, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { CourseCardComponent } from './course-card.component';
 
+import { CourseCardModule } from './course-card.module';
+import { CoursesListService } from '../courses-list/courses-list.service';
 import { ICourse } from '../../commons/constants';
 
-describe('CourseCardComponent : Stand-Alone', () => {
-  let component: CourseCardComponent;
-  let fixture: ComponentFixture<CourseCardComponent>;
+describe('CourseCardComponent : Test Host', () => {
+  let fixture: ComponentFixture<TestHostComponent>;
+  let testHost: TestHostComponent;
 
-  let courseMock: ICourse;
+  const coursesMock = [{ id: 1 }, { id: 2 }, { id: 3 }] as ICourse[];
 
-  @Pipe({ name: 'duration' })
-  class DurationPipeMock implements PipeTransform {
-    transform(input: number) {
-      return input.toString();
+  class CoursesServiceMock implements Partial<CoursesListService> {
+    getCourses() {
+      return coursesMock;
     }
   }
 
-  @Pipe({ name: 'date' })
-  class DatePipeMock implements PipeTransform {
-    transform(input: number) {
-      return input.toString();
+  @Component({
+    template: `
+      <app-course-card
+        *ngFor="let course of courses"
+        [course]="course"
+        (clickEvent)="onChildDelete($event)"
+      >
+      </app-course-card>
+    `
+  })
+  class TestHostComponent implements OnInit {
+    courses: ICourse[];
+
+    constructor(private coursesService: CoursesServiceMock) {}
+
+    ngOnInit() {
+      this.courses = this.coursesService.getCourses();
+    }
+
+    onChildDelete(id: number) {
+      this.courses = this.courses.filter(item => item.id !== id);
     }
   }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseCardComponent, DurationPipeMock, DatePipeMock]
+      declarations: [TestHostComponent],
+      imports: [CourseCardModule],
+      providers: [CoursesServiceMock]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CourseCardComponent);
-    component = fixture.componentInstance;
-
-    courseMock = {
-      id: 1,
-      title: 'TestTitle',
-      description: 'Test Description',
-      duration: 90,
-      date: new Date('2018-09-06')
-    };
-
-    component.course = courseMock;
+    fixture = TestBed.createComponent(TestHostComponent);
+    testHost = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(testHost).toBeTruthy();
   });
 
   describe('render', () => {
@@ -59,32 +69,10 @@ describe('CourseCardComponent : Stand-Alone', () => {
       compiled = fixture.nativeElement;
     });
 
-    it('should render h3 with this.course.title', () => {
-      expect(compiled.querySelector('h3').textContent).toContain(
-        courseMock.title
+    it('should render right quantity of course-cards', () => {
+      expect(compiled.querySelectorAll('app-course-card').length).toBe(
+        coursesMock.length
       );
-    });
-
-    it('should render div.course-card__description with this.course.description', () => {
-      expect(
-        compiled.querySelector('.course-card__description').textContent
-      ).toContain(courseMock.description);
-    });
-
-    it('should render div.course-card__datetime-info with this.course.duration', () => {
-      expect(
-        compiled
-          .querySelector('.course-card__datetime-info')
-          .querySelectorAll('span')[0].textContent
-      ).toContain(courseMock.duration.toString());
-    });
-
-    it('should render div.course-card__datetime-info with this.course.date', () => {
-      expect(
-        compiled
-          .querySelector('.course-card__datetime-info')
-          .querySelectorAll('span')[1].textContent
-      ).toContain(courseMock.date.toString());
     });
   });
 
@@ -95,13 +83,14 @@ describe('CourseCardComponent : Stand-Alone', () => {
       compiled = fixture.debugElement;
     });
 
-    it('should fire this.clickEvent after click on button.btn', () => {
-      const emitSpy: jasmine.Spy = spyOn(component.clickEvent, 'emit');
-      const deleteButton: DebugElement = compiled.query(By.css('.js-delete'));
+    it('should delete pointed course after click delete button', () => {
+      const deleteButtons: DebugElement[] = compiled.queryAll(
+        By.css('.js-delete')
+      );
 
-      deleteButton.triggerEventHandler('click', null);
+      deleteButtons[2].triggerEventHandler('click', null);
 
-      expect(emitSpy).toHaveBeenCalledWith(1);
+      expect(testHost.courses).toEqual([{ id: 1 }, { id: 2 }] as ICourse[]);
     });
   });
 });

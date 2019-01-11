@@ -28,10 +28,10 @@ describe('CoursesListComponent : As Class', () => {
     });
   });
 
-  describe('handleChildDelete(id)', () => {
+  describe('onChildDelete(id)', () => {
     it('should delete pointed course', () => {
       component.ngOnInit();
-      component.handleChildDelete(3);
+      component.onChildDelete(3);
 
       expect(component.courses).toEqual([{ id: 1 }, { id: 2 }] as ICourse[]);
     });

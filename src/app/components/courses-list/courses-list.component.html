@@ -1,7 +1,7 @@
 <app-course-card
   *ngFor="let course of courses"
   [course]="course"
-  (clickEvent)="handleChildDelete($event)"
+  (clickEvent)="onChildDelete($event)"
 ></app-course-card>
 <div class="load-more-bar">
   <button class="btn waves-effect waves-light">Load more</button>
