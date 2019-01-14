@@ -1,3 +1,4 @@
+import { DebugElement, Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -5,42 +6,63 @@ import { CoursesListComponent } from './courses-list.component';
 
 import { CourseCardModule } from '../course-card/course-card.module';
 import { CoursesListService } from './courses-list.service';
+import { SearchService } from '../../commons/services/search.service';
 import { ICourse } from '../../commons/constants';
-import { DebugElement } from '@angular/core';
+import { NO_DATA_PLACEHOLDER } from './courses-list.component';
 
 describe('CoursesListComponent-Stand-Alone', () => {
   let component: CoursesListComponent;
   let fixture: ComponentFixture<CoursesListComponent>;
 
-  const coursesMock = [{ id: 1 }, { id: 2 }, { id: 3 }] as ICourse[];
-  const serviceMock: Partial<CoursesListService> = {
+  let coursesMock: ICourse[];
+  const coursesServiceMock: Partial<CoursesListService> = {
     getCourses: () => coursesMock
   };
 
+  @Pipe({ name: 'filter' })
+  class FilterPipeMock implements PipeTransform {
+    transform(courses: ICourse[], searchQuery: string): ICourse[] {
+      return courses;
+    }
+  }
+
+  @Pipe({
+    name: 'orderByDate'
+  })
+  class OrderByDatePipeMock implements PipeTransform {
+    transform(courses: ICourse[]): ICourse[] {
+      return courses;
+    }
+  }
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CoursesListComponent],
-      imports: [CourseCardModule]
+      declarations: [CoursesListComponent, FilterPipeMock, OrderByDatePipeMock],
+      imports: [CourseCardModule],
+      providers: [CoursesListService, SearchService]
     })
       .overrideComponent(CoursesListComponent, {
         set: {
-          providers: [{ provide: CoursesListService, useValue: serviceMock }]
+          providers: [
+            { provide: CoursesListService, useValue: coursesServiceMock }
+          ]
         }
       })
       .compileComponents();
   }));
 
   beforeEach(() => {
+    coursesMock = [{ id: 1 }, { id: 2 }, { id: 3 }] as ICourse[];
     fixture = TestBed.createComponent(CoursesListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should exists', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should fill this.courses after render', () => {
+  it('should fill courses after render', () => {
     expect(component.courses).toEqual(coursesMock);
   });
 
@@ -56,6 +78,17 @@ describe('CoursesListComponent-Stand-Alone', () => {
         coursesMock.length
       );
     });
+
+    it('should render placeholder if no data', () => {
+      coursesMock = [] as ICourse[];
+      fixture = TestBed.createComponent(CoursesListComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('div').textContent).toContain(
+        NO_DATA_PLACEHOLDER.toUpperCase()
+      );
+    });
   });
 
   describe('events', () => {
@@ -65,7 +98,6 @@ describe('CoursesListComponent-Stand-Alone', () => {
       compiled = fixture.debugElement;
     });
 
-    // is it right to invade in child element ?
     it('should delete pointed course after click delete button', () => {
       const deleteButtons: DebugElement[] = compiled.queryAll(
         By.css('.js-delete')

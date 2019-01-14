@@ -1,10 +1,13 @@
+import { DebugElement, Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Pipe, PipeTransform, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { includes } from 'lodash';
 
 import { CourseCardComponent } from './course-card.component';
 
+import { CourseCardBorderDirective } from './directives/course-card-border.directive';
 import { ICourse } from '../../commons/constants';
+import { ControlBarComponent } from '../control-bar/control-bar.component';
 
 describe('CourseCardComponent-Stand-Alone', () => {
   let component: CourseCardComponent;
@@ -28,7 +31,12 @@ describe('CourseCardComponent-Stand-Alone', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseCardComponent, DurationPipeMock, DatePipeMock]
+      declarations: [
+        CourseCardComponent,
+        DurationPipeMock,
+        DatePipeMock,
+        CourseCardBorderDirective
+      ]
     }).compileComponents();
   }));
 
@@ -41,14 +49,15 @@ describe('CourseCardComponent-Stand-Alone', () => {
       title: 'TestTitle',
       description: 'Test Description',
       duration: 90,
-      date: new Date('2018-09-06')
+      date: new Date('2018-09-06'),
+      rating: 5
     };
-
     component.course = courseMock;
+
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should exists', () => {
     expect(component).toBeTruthy();
   });
 
@@ -59,19 +68,19 @@ describe('CourseCardComponent-Stand-Alone', () => {
       compiled = fixture.nativeElement;
     });
 
-    it('should render h3 with this.course.title', () => {
+    it('should render title', () => {
       expect(compiled.querySelector('h3').textContent).toContain(
-        courseMock.title
+        courseMock.title.toUpperCase()
       );
     });
 
-    it('should render div.course-card__description with this.course.description', () => {
+    it('should render description', () => {
       expect(
         compiled.querySelector('.course-card__description').textContent
       ).toContain(courseMock.description);
     });
 
-    it('should render div.course-card__datetime-info with this.course.duration', () => {
+    it('should render duration', () => {
       expect(
         compiled
           .querySelector('.course-card__datetime-info')
@@ -79,12 +88,54 @@ describe('CourseCardComponent-Stand-Alone', () => {
       ).toContain(courseMock.duration.toString());
     });
 
-    it('should render div.course-card__datetime-info with this.course.date', () => {
+    it('should render date', () => {
       expect(
         compiled
           .querySelector('.course-card__datetime-info')
           .querySelectorAll('span')[1].textContent
       ).toContain(courseMock.date.toString());
+    });
+
+    it('should render top-rated icon if rating = 5', () => {
+      component.course.rating = 5;
+      fixture.detectChanges();
+
+      expect(
+        compiled.querySelector('h3').querySelector('.course-card__rating-icon')
+      ).toBeTruthy();
+    });
+
+    it('should not render top-rated icon if rating < 5', () => {
+      component.course.rating = 4;
+      fixture.detectChanges();
+
+      expect(
+        compiled.querySelector('h3').querySelector('.course-card__rating-icon')
+      ).toBeFalsy();
+    });
+
+    it('should add special class with backgroung style if rating = 5', () => {
+      component.course.rating = 5;
+      fixture.detectChanges();
+
+      expect(
+        includes(
+          compiled.querySelector('div').classList,
+          'course-card__top-rated-bg'
+        )
+      ).toBe(true);
+    });
+
+    it('should not add special class with backgroung style if rating = 5', () => {
+      component.course.rating = 4;
+      fixture.detectChanges();
+
+      expect(
+        includes(
+          compiled.querySelector('div').classList,
+          'course-card__top-rated-bg'
+        )
+      ).toBe(false);
     });
   });
 
@@ -95,7 +146,7 @@ describe('CourseCardComponent-Stand-Alone', () => {
       compiled = fixture.debugElement;
     });
 
-    it('should fire this.clickEvent after click on button.btn', () => {
+    it('should fire event after click on button', () => {
       const emitSpy: jasmine.Spy = spyOn(component.clickEvent, 'emit');
       const deleteButton: DebugElement = compiled.query(By.css('.js-delete'));
 

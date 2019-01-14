@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 
 import { SearchBarComponent } from './search-bar.component';
 
+import { SearchService } from '../../commons/services/search.service';
+
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;
   let fixture: ComponentFixture<SearchBarComponent>;
@@ -10,7 +12,8 @@ describe('SearchBarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SearchBarComponent],
-      imports: [FormsModule]
+      imports: [FormsModule],
+      providers: [SearchService]
     }).compileComponents();
   }));
 
@@ -20,7 +23,13 @@ describe('SearchBarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should exists', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('should set this.searchQuery', () => {
+  // });
+
+  // it('should calls methods', () => {
+  // });
 });

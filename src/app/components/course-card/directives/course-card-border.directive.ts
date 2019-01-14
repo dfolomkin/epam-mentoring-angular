@@ -1,6 +1,12 @@
 import { Directive, OnInit, ElementRef, Input } from '@angular/core';
 import * as moment from 'moment';
 
+export const CLASSES = {
+  fresh: 'course-card--fresh',
+  futher: 'course-card--further',
+  default: 'course-card--default'
+};
+
 @Directive({
   selector: '[appCourseCardBorder]'
 })
@@ -15,10 +21,10 @@ export class CourseCardBorderDirective implements OnInit {
       moment().subtract(14, 'days'),
       moment()
     )
-      ? 'course-card--fresh'
+      ? CLASSES.fresh
       : moment(this.courseDate).isAfter(moment())
-      ? 'course-card--further'
-      : 'course-card--default';
+      ? CLASSES.futher
+      : CLASSES.default;
 
     this.elem.nativeElement.classList.add(borderClass);
   }

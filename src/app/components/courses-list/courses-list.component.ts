@@ -1,10 +1,12 @@
 import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ICourse } from '../../commons/constants';
 import { CoursesListService } from './courses-list.service';
 
+import { ICourse } from '../../commons/constants';
 import { SearchService } from '../../commons/services/search.service';
+
+export const NO_DATA_PLACEHOLDER = 'No data. Feel free to add new course.';
 
 @Component({
   selector: 'app-courses-list',
@@ -13,7 +15,7 @@ import { SearchService } from '../../commons/services/search.service';
 })
 export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
   courses: ICourse[];
-  noDataPlaceholder = 'No data. Feel free to add new course.';
+  noDataPlaceholder = NO_DATA_PLACEHOLDER;
   searchQuery: string;
   subscription: Subscription;
 

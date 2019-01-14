@@ -7,7 +7,7 @@ import { SearchService } from 'src/app/commons/services/search.service';
   styleUrls: ['./search-bar.component.less']
 })
 export class SearchBarComponent implements OnInit {
-  private searchString: string;
+  searchString: string;
 
   constructor(private searchService: SearchService) {}
 

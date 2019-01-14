@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, OnInit, DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { CourseCardComponent } from './course-card.component';
@@ -58,7 +58,7 @@ describe('CourseCardComponent-Test-Host', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should exists', () => {
     expect(testHost).toBeTruthy();
   });
 
