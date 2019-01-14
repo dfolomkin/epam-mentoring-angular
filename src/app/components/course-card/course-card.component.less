@@ -7,7 +7,8 @@
   margin-bottom: @gaps;
   padding: @gaps;
   font-size: 1.6rem;
-  border: 1px solid @clr-light-gray;
+  border: 2px solid @clr-light-gray;
+  border-radius: 2px;
 
   &__data {
     flex-basis: 1%;
@@ -37,5 +38,21 @@
       width: 100%;
       margin-bottom: 0.8rem;
     }
+  }
+
+  &--fresh {
+    border: 2px solid lightgreen;
+  }
+
+  &--further {
+    border: 2px solid @clr-violet;
+  }
+
+  &__rating-icon {
+    color: @clr-dark-violet;
+  }
+
+  &__top-rated-bg {
+    background-color: @clr-light-violet;
   }
 }

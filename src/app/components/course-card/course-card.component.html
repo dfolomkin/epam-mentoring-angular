@@ -1,7 +1,16 @@
-<div class="course-card">
+<div
+  class="course-card"
+  [appCourseCardBorder]="course.date"
+  [ngClass]="{ 'course-card__top-rated-bg': course.rating === 5 }"
+>
   <div class="course-card__data">
     <div class="course-card__title">
-      <h3>{{ course.title }}</h3>
+      <h3>
+        {{ course.title | uppercase }} {{ isNewCtrl }}
+        <span *ngIf="course.rating === 5" class="course-card__rating-icon"
+          ><i class="material-icons">star</i>
+        </span>
+      </h3>
       <div class="course-card__datetime-info">
         <span
           ><i class="material-icons">access_time</i>

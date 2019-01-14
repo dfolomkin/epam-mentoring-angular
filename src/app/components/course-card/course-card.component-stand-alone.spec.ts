@@ -6,7 +6,7 @@ import { CourseCardComponent } from './course-card.component';
 
 import { ICourse } from '../../commons/constants';
 
-describe('CourseCardComponent : Stand-Alone', () => {
+describe('CourseCardComponent-Stand-Alone', () => {
   let component: CourseCardComponent;
   let fixture: ComponentFixture<CourseCardComponent>;
 

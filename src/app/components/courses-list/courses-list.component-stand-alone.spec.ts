@@ -8,7 +8,7 @@ import { CoursesListService } from './courses-list.service';
 import { ICourse } from '../../commons/constants';
 import { DebugElement } from '@angular/core';
 
-describe('CoursesListComponent : Stand-Alone', () => {
+describe('CoursesListComponent-Stand-Alone', () => {
   let component: CoursesListComponent;
   let fixture: ComponentFixture<CoursesListComponent>;
 

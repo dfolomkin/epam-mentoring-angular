@@ -8,7 +8,7 @@ import { CourseCardModule } from './course-card.module';
 import { CoursesListService } from '../courses-list/courses-list.service';
 import { ICourse } from '../../commons/constants';
 
-describe('CourseCardComponent : Test Host', () => {
+describe('CourseCardComponent-Test-Host', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let testHost: TestHostComponent;
 

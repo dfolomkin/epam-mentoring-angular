@@ -4,6 +4,7 @@
     type="text"
     class="validate"
     [(ngModel)]="searchString"
+    (keyup)="onInputKeyUp()"
   />
   <button class="btn waves-effect waves-light" (click)="onSearchClick()">
     Search <i class="material-icons left">search</i>

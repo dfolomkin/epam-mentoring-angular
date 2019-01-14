@@ -1,8 +1,4 @@
-import { TestBed } from '@angular/core/testing';
-
 import { CoursesListService } from './courses-list.service';
-
-import { ICourse } from '../../commons/constants';
 
 describe('CoursesListService', () => {
   let service: CoursesListService;

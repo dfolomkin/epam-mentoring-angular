@@ -3,15 +3,17 @@ import { CommonModule } from '@angular/common';
 
 import { CoursesListComponent } from './courses-list.component';
 import { CoursesListService } from './courses-list.service';
-import { CoursesFilterPipe } from './courses-list.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 import { CourseCardModule } from '../course-card/course-card.module';
+import { OrderByDatePipe } from '../../commons/pipes/order-by-date.pipe';
+import { SearchService } from '../../commons/services/search.service';
 
 @NgModule({
-  declarations: [CoursesListComponent, CoursesFilterPipe],
+  declarations: [CoursesListComponent, FilterPipe, OrderByDatePipe],
   imports: [CommonModule, CourseCardModule],
   exports: [CoursesListComponent],
   bootstrap: [CoursesListComponent],
-  providers: [CoursesListService]
+  providers: [CoursesListService, SearchService]
 })
 export class CoursesListModule {}

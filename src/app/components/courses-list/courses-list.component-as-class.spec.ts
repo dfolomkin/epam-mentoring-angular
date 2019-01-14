@@ -3,7 +3,7 @@ import { CoursesListComponent } from './courses-list.component';
 import { CoursesListService } from './courses-list.service';
 import { ICourse } from '../../commons/constants';
 
-describe('CoursesListComponent : As Class', () => {
+describe('CoursesListComponent-As-Class', () => {
   let component: CoursesListComponent;
 
   let coursesMock;

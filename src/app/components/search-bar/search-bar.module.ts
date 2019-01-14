@@ -4,10 +4,13 @@ import { FormsModule } from '@angular/forms';
 
 import { SearchBarComponent } from './search-bar.component';
 
+import { SearchService } from '../../commons/services/search.service';
+
 @NgModule({
   declarations: [SearchBarComponent],
   imports: [CommonModule, FormsModule],
   exports: [SearchBarComponent],
-  bootstrap: [SearchBarComponent]
+  bootstrap: [SearchBarComponent],
+  providers: [SearchService]
 })
 export class SearchBarModule {}

@@ -1,6 +1,6 @@
 import { CourseCardComponent } from './course-card.component';
 
-describe('CourseCardComponent : As Class', () => {
+describe('CourseCardComponent-As-Class', () => {
   let component: CourseCardComponent;
 
   beforeEach(() => {
