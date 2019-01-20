@@ -8,7 +8,7 @@ import {
   CLASSES
 } from './course-card-border.directive';
 
-describe('CourseCardBorderDirective', () => {
+xdescribe('CourseCardBorderDirective', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let testHost: TestHostComponent;
 

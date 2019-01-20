@@ -31,19 +31,17 @@ export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     this.courses = this.coursesService.getCourses();
-    console.log('OnInit has fired!');
   }
 
-  ngOnChanges() {
-    console.log('OnChanges has fired!');
-  }
+  ngOnChanges() {}
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
   onChildDelete(id: number) {
-    this.courses = this.courses.filter(item => item.id !== id);
-    console.log(`Course with id ${id} has been removed`);
+    if (confirm('Do you really want to delete this course?')) {
+      this.courses = this.coursesService.deleteCourse(id);
+    }
   }
 }
