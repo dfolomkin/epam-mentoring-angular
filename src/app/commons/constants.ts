@@ -89,3 +89,8 @@ export const coursesMock: ICourse[] = [
     date: new Date('2018-10-29')
   }
 ];
+
+export const getSequence: (length?: number) => string = (lenght = 7) =>
+  Math.random()
+    .toString(36)
+    .substring(lenght);
