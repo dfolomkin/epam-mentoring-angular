@@ -8,6 +8,7 @@ import { BreadcrumbsModule } from './components/breadcrumbs/breadcrumbs.module';
 import { FooterModule } from './components/footer/footer.module';
 import { CoursesModule } from './containers/courses/courses.module';
 import { CourseEditModule } from './containers/course-edit/course-edit.module';
+import { AuthModule } from './containers/auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,8 @@ import { CourseEditModule } from './containers/course-edit/course-edit.module';
     BreadcrumbsModule,
     FooterModule,
     CoursesModule,
-    CourseEditModule
+    CourseEditModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

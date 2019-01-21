@@ -1,4 +1,4 @@
-<nav class="simple-breadcrumbs">
+<nav *ngIf="authService.isAuthed()" class="simple-breadcrumbs">
   <a routerLink="/courses" routerLinkActive="active">Courses</a> /
   <a routerLink="/course-edit" routerLinkActive="active">Course-edit</a>
 </nav>

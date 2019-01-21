@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import * as ngStorage from 'ngstorage';
 import { remove, isEmpty } from 'lodash';
 
 import { getSequence } from '../constants';
 
-interface IAuthPair {
+export interface IAuthPair {
   login: string;
   password: string;
 }
@@ -13,23 +12,23 @@ interface IAuthPair {
 export class AuthService {
   authPair: IAuthPair;
 
-  constructor(private $localStorage = ngStorage.$localStorage) {}
+  constructor() {}
 
   login(pair: IAuthPair): void {
     this.authPair = pair;
-    this.$localStorage.token = getSequence();
+    localStorage.setItem('token', getSequence());
   }
 
   logout(): void {
     this.authPair = {} as IAuthPair;
-    remove(this.$localStorage, 'token');
+    localStorage.removeItem('token');
   }
 
-  getUserInfo(): string {
-    return this.authPair.login;
+  getUserInfo(): string | undefined {
+    return this.authPair && this.authPair.login;
   }
 
-  isAuthenticated(): boolean {
-    return !isEmpty(this.authPair);
+  isAuthed(): boolean {
+    return !!(this.authPair && this.authPair.login);
   }
 }

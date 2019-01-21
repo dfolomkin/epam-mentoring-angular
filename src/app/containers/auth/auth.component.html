@@ -1,0 +1,21 @@
+<div class="auth-wrapper">
+  <form class="auth-form">
+    <input
+      placeholder="Login"
+      type="text"
+      class="validate"
+      [(ngModel)]="authPair.login"
+      name="login"
+    />
+    <input
+      placeholder="Password"
+      type="text"
+      class="validate"
+      [(ngModel)]="authPair.password"
+      name="password"
+    />
+    <button class="btn waves-effect waves-light" (click)="onLoginClick()">
+      Login
+    </button>
+  </form>
+</div>
