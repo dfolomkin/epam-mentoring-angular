@@ -20,7 +20,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.authPair = {} as IAuthPair;
+    this.authPair = undefined as IAuthPair;
     localStorage.removeItem('token');
   }
 

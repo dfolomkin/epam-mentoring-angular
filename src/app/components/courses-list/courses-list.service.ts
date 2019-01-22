@@ -3,9 +3,11 @@ import { max, remove } from 'lodash';
 
 import { coursesMock, ICourse } from '../../commons/constants';
 
-// test it
-export const getNewId = (courses: ICourse[]): number =>
-  max(courses.map(item => item.id)) + 1;
+export const getNewId = (courses: ICourse[]): number => {
+  const ids = courses.map(item => item.id);
+
+  return ids.length ? max(ids) + 1 : 1;
+};
 
 @Injectable()
 export class CoursesListService {
