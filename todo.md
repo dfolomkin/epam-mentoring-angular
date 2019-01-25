@@ -9,3 +9,5 @@ need auth to add course and edit course
 
 do correct breadcrumbs
 courses / courses-edit + add constants
+
+try change inner field or part of input in onPush strategy
