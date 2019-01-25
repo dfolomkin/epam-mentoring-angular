@@ -5,7 +5,9 @@
     (clickEvent)="onChildDelete($event)"
   ></app-course-card>
   <div class="load-more-bar">
-    <button class="btn waves-effect waves-light">Load more</button>
+    <button type="button" class="btn waves-effect waves-light">
+      Load more
+    </button>
   </div>
 </div>
 <div *ngIf="!courses.length" class="no-data-placeholder">

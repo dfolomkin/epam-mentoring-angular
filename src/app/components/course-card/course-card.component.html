@@ -25,10 +25,11 @@
     <div class="course-card__description">{{ course.description }}</div>
   </div>
   <div class="course-card__control">
-    <button class="btn waves-effect waves-light js-edit">
+    <button type="button" class="btn waves-effect waves-light js-edit">
       Edit <i class="material-icons left">edit</i>
     </button>
     <button
+      type="button"
       class="btn waves-effect waves-light js-delete"
       (click)="onDeleteClick()"
     >

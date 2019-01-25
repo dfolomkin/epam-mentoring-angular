@@ -5,6 +5,7 @@
       authService.getUserInfo()
     }}</span>
     <button
+      type="button"
       *ngIf="authService.isAuthed()"
       class="btn waves-effect waves-light"
       (click)="onLogoutClick()"
