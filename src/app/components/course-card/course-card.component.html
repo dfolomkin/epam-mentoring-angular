@@ -25,9 +25,13 @@
     <div class="course-card__description">{{ course.description }}</div>
   </div>
   <div class="course-card__control">
-    <button type="button" class="btn waves-effect waves-light js-edit">
+    <a
+      class="btn waves-effect waves-light"
+      routerLink="/course-edit/{{ course.id }}"
+      routerLinkActive="active"
+    >
       Edit <i class="material-icons left">edit</i>
-    </button>
+    </a>
     <button
       type="button"
       class="btn waves-effect waves-light js-delete"

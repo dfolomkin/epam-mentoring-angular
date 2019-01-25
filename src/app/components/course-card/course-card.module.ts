@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { CourseCardComponent } from './course-card.component';
 import { CourseCardBorderDirective } from './directives/course-card-border.directive';
 
-import { DurationPipe } from '../../commons/pipes/duration.pipe';
+import { AppRoutingModule } from '../../app-routing.module';
+import { PipesModule } from '../../commons/pipes/pipes.module';
 
 @NgModule({
-  declarations: [CourseCardComponent, DurationPipe, CourseCardBorderDirective],
-  imports: [CommonModule],
+  declarations: [CourseCardComponent, CourseCardBorderDirective],
+  imports: [CommonModule, AppRoutingModule, PipesModule],
   exports: [CourseCardComponent],
   bootstrap: [CourseCardComponent]
 })

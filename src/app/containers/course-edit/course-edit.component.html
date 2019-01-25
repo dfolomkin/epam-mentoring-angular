@@ -1,9 +1,9 @@
 <div class="course-edit-wrapper">
   <form class="course-edit-form">
     <div class="control-group">
-      <label for="c_title">Title:</label>
+      <label for="form_title">Title:</label>
       <input
-        id="c_title"
+        id="form_title"
         placeholder="Title"
         type="text"
         class="validate"
@@ -11,12 +11,67 @@
         name="title"
       />
     </div>
+    <div class="control-group">
+      <label for="form_description">Description:</label>
+      <textarea
+        id="form_description"
+        placeholder="Decription"
+        type="text"
+        class="materialize-textarea"
+        rows="3"
+        [(ngModel)]="course.description"
+        name="description"
+      ></textarea>
+    </div>
+    <div class="control-group">
+      <label for="form_date">Date:</label>
+      <input
+        id="form_date"
+        placeholder="Date"
+        type="date"
+        class="validate"
+        [(ngModel)]="course.date"
+        name="date"
+      />
+    </div>
+    <div class="control-group">
+      <label for="form_duration">Duration:</label>
+      <input
+        id="form_duration"
+        placeholder="Duration"
+        type="number"
+        class="validate"
+        [(ngModel)]="course.duration"
+        name="duration"
+      />
+      {{ course.duration | duration }}
+    </div>
+    <div class="control-group">
+      <label for="form_author">Author:</label>
+      <input
+        id="form_author"
+        placeholder="Author"
+        type="text"
+        class="validate"
+        name="author"
+      />
+    </div>
 
     <div class="control-group control-group-row">
-      <button class="btn waves-effect waves-light" (click)="onSaveClick()">
+      <button
+        type="button"
+        class="btn waves-effect waves-light"
+        (click)="onSaveClick()"
+      >
         Save
       </button>
-      <a class="btn waves-effect waves-light"> Cancel </a>
+      <a
+        class="btn waves-effect waves-light"
+        routerLink="/courses"
+        routerLinkActive="active"
+      >
+        Cancel
+      </a>
     </div>
   </form>
 </div>

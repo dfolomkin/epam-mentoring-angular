@@ -8,6 +8,7 @@ import { AuthComponent } from './containers/auth/auth.component';
 const routes: Routes = [
   { path: 'courses', component: CoursesComponent },
   { path: 'course-edit', component: CourseEditComponent },
+  { path: 'course-edit/:id', component: CourseEditComponent },
   { path: 'auth', component: AuthComponent },
   { path: '', redirectTo: '/courses', pathMatch: 'full' }
 ];
@@ -17,4 +18,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
-export const routingComponents = [CoursesComponent, CourseEditComponent];

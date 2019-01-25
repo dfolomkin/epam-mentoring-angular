@@ -14,4 +14,8 @@ describe('DurationPipe', () => {
     expect(pipe.transform(90)).toBe('1h 30m');
     expect(pipe.transform(30)).toBe('30m');
   });
+
+  it('should return empty string if input is undefined', () => {
+    expect(pipe.transform(undefined)).toBe('');
+  });
 });
