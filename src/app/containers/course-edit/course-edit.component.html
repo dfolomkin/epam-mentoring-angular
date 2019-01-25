@@ -1,3 +1,22 @@
-<p>
-  course-edit works!
-</p>
+<div class="course-edit-wrapper">
+  <form class="course-edit-form">
+    <div class="control-group">
+      <label for="c_title">Title:</label>
+      <input
+        id="c_title"
+        placeholder="Title"
+        type="text"
+        class="validate"
+        [(ngModel)]="course.title"
+        name="title"
+      />
+    </div>
+
+    <div class="control-group control-group-row">
+      <button class="btn waves-effect waves-light" (click)="onSaveClick()">
+        Save
+      </button>
+      <a class="btn waves-effect waves-light"> Cancel </a>
+    </div>
+  </form>
+</div>

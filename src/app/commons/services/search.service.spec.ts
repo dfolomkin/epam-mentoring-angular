@@ -1,6 +1,6 @@
 import { SearchService } from './search.service';
 
-describe('CoursesListService', () => {
+describe('CoursesService', () => {
   let service: SearchService;
 
   beforeEach(() => {

@@ -5,9 +5,9 @@ import { By } from '@angular/platform-browser';
 import { CoursesListComponent } from './courses-list.component';
 
 import { CourseCardModule } from '../course-card/course-card.module';
-import { CoursesListService } from './courses-list.service';
+import { CoursesService } from '../../commons/services/courses.service';
 import { SearchService } from '../../commons/services/search.service';
-import { ICourse } from '../../commons/constants';
+import { ICourse } from '../../commons/interfaces/course.interface';
 import { NO_DATA_PLACEHOLDER } from './courses-list.component';
 
 describe('CoursesListComponent-Stand-Alone', () => {
@@ -15,7 +15,7 @@ describe('CoursesListComponent-Stand-Alone', () => {
   let fixture: ComponentFixture<CoursesListComponent>;
 
   let coursesMock: ICourse[];
-  const coursesServiceMock: Partial<CoursesListService> = {
+  const coursesServiceMock: Partial<CoursesService> = {
     getCourses: () => coursesMock
   };
 
@@ -39,13 +39,11 @@ describe('CoursesListComponent-Stand-Alone', () => {
     TestBed.configureTestingModule({
       declarations: [CoursesListComponent, FilterPipeMock, OrderByDatePipeMock],
       imports: [CourseCardModule],
-      providers: [CoursesListService, SearchService]
+      providers: [CoursesService, SearchService]
     })
       .overrideComponent(CoursesListComponent, {
         set: {
-          providers: [
-            { provide: CoursesListService, useValue: coursesServiceMock }
-          ]
+          providers: [{ provide: CoursesService, useValue: coursesServiceMock }]
         }
       })
       .compileComponents();

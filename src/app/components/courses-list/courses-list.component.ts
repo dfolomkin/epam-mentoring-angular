@@ -1,10 +1,10 @@
 import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { CoursesListService } from './courses-list.service';
+import { CoursesService } from '../../commons/services/courses.service';
 
-import { ICourse } from '../../commons/constants';
 import { SearchService } from '../../commons/services/search.service';
+import { ICourse } from '../../commons/interfaces/course.interface';
 
 export const NO_DATA_PLACEHOLDER = 'No data. Feel free to add new course.';
 
@@ -20,7 +20,7 @@ export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
   subscription: Subscription;
 
   constructor(
-    private coursesService: CoursesListService,
+    private coursesService: CoursesService,
     private searchService: SearchService
   ) {
     this.searchQuery = '';

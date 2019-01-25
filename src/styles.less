@@ -23,3 +23,18 @@ html {
 @main-bg: @clr-violet;
 
 @gaps: 1.6rem;
+
+.control-group {
+  margin-bottom: @gaps;
+}
+
+.control-group-row {
+  display: flex;
+  justify-content: flex-end;
+
+  & button,
+  a,
+  input {
+    margin-left: @gaps;
+  }
+}

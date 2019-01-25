@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { max, remove } from 'lodash';
 
-import { coursesMock, ICourse } from '../../commons/constants';
+import { coursesMock } from '../constants';
+import { ICourse } from '../interfaces/course.interface';
 
 export const getNewId = (courses: ICourse[]): number => {
   const ids = courses.map(item => item.id);
@@ -10,7 +11,7 @@ export const getNewId = (courses: ICourse[]): number => {
 };
 
 @Injectable()
-export class CoursesListService {
+export class CoursesService {
   courses: ICourse[];
 
   constructor() {

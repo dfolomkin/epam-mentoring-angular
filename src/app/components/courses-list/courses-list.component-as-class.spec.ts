@@ -1,14 +1,14 @@
 import { CoursesListComponent } from './courses-list.component';
 
-import { CoursesListService } from './courses-list.service';
-import { ICourse } from '../../commons/constants';
+import { CoursesService } from '../../commons/services/courses.service';
 import { SearchService } from '../../commons/services/search.service';
+import { ICourse } from '../../commons/interfaces/course.interface';
 
 describe('CoursesListComponent-As-Class', () => {
   let component: CoursesListComponent;
 
   let coursesMock;
-  const coursesServiceMock: Partial<CoursesListService> = {
+  const coursesServiceMock: Partial<CoursesService> = {
     getCourses: () => coursesMock
   };
   let searchService: SearchService;
@@ -17,7 +17,7 @@ describe('CoursesListComponent-As-Class', () => {
     coursesMock = [{ id: 1 }, { id: 2 }, { id: 3 }] as ICourse[];
     searchService = new SearchService();
     component = new CoursesListComponent(
-      coursesServiceMock as CoursesListService,
+      coursesServiceMock as CoursesService,
       searchService
     );
   });

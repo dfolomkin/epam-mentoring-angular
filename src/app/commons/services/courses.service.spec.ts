@@ -1,9 +1,9 @@
-import { CoursesListService, getNewId } from './courses-list.service';
+import { CoursesService, getNewId } from './courses.service';
 
-import { ICourse } from '../../commons/constants';
+import { ICourse } from '../interfaces/course.interface';
 
-fdescribe('CoursesListService', () => {
-  let service: CoursesListService;
+fdescribe('CoursesService', () => {
+  let service: CoursesService;
   const coursesMock: ICourse[] = [
     { id: 1, title: 'Course1' },
     { id: 2, title: 'Course2' },
@@ -11,7 +11,7 @@ fdescribe('CoursesListService', () => {
   ] as ICourse[];
 
   beforeEach(() => {
-    service = new CoursesListService();
+    service = new CoursesService();
     service.courses = [...coursesMock]; // spread for copy instead of link
   });
 

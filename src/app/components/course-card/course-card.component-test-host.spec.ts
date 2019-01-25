@@ -5,8 +5,8 @@ import { By } from '@angular/platform-browser';
 import { CourseCardComponent } from './course-card.component';
 
 import { CourseCardModule } from './course-card.module';
-import { CoursesListService } from '../courses-list/courses-list.service';
-import { ICourse } from '../../commons/constants';
+import { CoursesService } from '../../commons/services/courses.service';
+import { ICourse } from '../../commons/interfaces/course.interface';
 
 describe('CourseCardComponent-Test-Host', () => {
   let fixture: ComponentFixture<TestHostComponent>;
@@ -14,7 +14,7 @@ describe('CourseCardComponent-Test-Host', () => {
 
   const coursesMock = [{ id: 1 }, { id: 2 }, { id: 3 }] as ICourse[];
 
-  class CoursesServiceMock implements Partial<CoursesListService> {
+  class CoursesServiceMock implements Partial<CoursesService> {
     getCourses() {
       return coursesMock;
     }

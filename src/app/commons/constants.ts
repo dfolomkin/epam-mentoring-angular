@@ -1,11 +1,4 @@
-export interface ICourse {
-  id: number;
-  title: string;
-  description: string;
-  duration: number;
-  rating: number;
-  date: Date;
-}
+import { ICourse } from './interfaces/course.interface';
 
 export const coursesMock: ICourse[] = [
   {
