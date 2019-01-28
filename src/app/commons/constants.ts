@@ -87,3 +87,9 @@ export const getSequence: (length?: number) => string = (lenght = 7) =>
   Math.random()
     .toString(36)
     .substring(lenght);
+
+export const routesMap = {
+  courses: 'courses',
+  courseEdit: 'course-edit',
+  auth: 'auth'
+};

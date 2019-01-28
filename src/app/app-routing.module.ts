@@ -4,13 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { CoursesComponent } from './containers/courses/courses.component';
 import { CourseEditComponent } from './containers/course-edit/course-edit.component';
 import { AuthComponent } from './containers/auth/auth.component';
+import { routesMap } from './commons/constants';
 
 const routes: Routes = [
-  { path: 'courses', component: CoursesComponent },
-  { path: 'course-edit', component: CourseEditComponent },
-  { path: 'course-edit/:id', component: CourseEditComponent },
-  { path: 'auth', component: AuthComponent },
-  { path: '', redirectTo: '/courses', pathMatch: 'full' }
+  { path: routesMap.courses, component: CoursesComponent },
+  { path: routesMap.courseEdit, component: CourseEditComponent },
+  { path: `${routesMap.courseEdit}/:id`, component: CourseEditComponent },
+  { path: routesMap.auth, component: AuthComponent },
+  { path: '', redirectTo: `/${routesMap.courses}`, pathMatch: 'full' }
 ];
 
 @NgModule({

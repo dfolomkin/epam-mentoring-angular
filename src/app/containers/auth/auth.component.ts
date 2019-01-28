@@ -19,7 +19,7 @@ export class AuthComponent implements OnInit {
 
   onLoginClick() {
     this.authService.login(this.authPair);
-    this.router.navigate(['/courses']);
+    this.router.navigate(['/']);
     console.log('Login has been done.');
   }
 }
