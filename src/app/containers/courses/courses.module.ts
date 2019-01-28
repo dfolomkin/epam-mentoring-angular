@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { CoursesComponent } from './courses.component';
 
-import { ControlBarModule } from '../../components/control-bar/control-bar.module';
-import { CoursesListModule } from '../../components/courses-list/courses-list.module';
+import { ControlBarModule } from 'src/app/components/control-bar/control-bar.module';
+import { CoursesListModule } from 'src/app/components/courses-list/courses-list.module';
 
 @NgModule({
   declarations: [CoursesComponent],

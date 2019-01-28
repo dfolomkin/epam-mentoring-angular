@@ -4,10 +4,10 @@ import { By } from '@angular/platform-browser';
 
 import { CoursesListComponent } from './courses-list.component';
 
-import { CourseCardModule } from '../course-card/course-card.module';
-import { CoursesService } from '../../commons/services/courses.service';
-import { SearchService } from '../../commons/services/search.service';
-import { ICourse } from '../../commons/interfaces/course.interface';
+import { CourseCardModule } from 'src/app/components/course-card/course-card.module';
+import { CoursesService } from 'src/app/commons/services/courses.service';
+import { SearchService } from 'src/app/commons/services/search.service';
+import { ICourse } from 'src/app/commons/interfaces/course.interface';
 import { NO_DATA_PLACEHOLDER } from './courses-list.component';
 
 describe('CoursesListComponent-Stand-Alone', () => {

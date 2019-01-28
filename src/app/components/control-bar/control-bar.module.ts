@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ControlBarComponent } from './control-bar.component';
 
-import { AppRoutingModule } from '../../app-routing.module';
-import { SearchBarModule } from '../search-bar/search-bar.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { SearchBarModule } from 'src/app/components/search-bar/search-bar.module';
 
 @NgModule({
   declarations: [ControlBarComponent],

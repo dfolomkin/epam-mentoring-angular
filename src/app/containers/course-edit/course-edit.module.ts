@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { CourseEditComponent } from './course-edit.component';
 
-import { AppRoutingModule } from '../../app-routing.module';
-import { CoursesService } from '../../commons/services/courses.service';
-import { PipesModule } from '../../commons/pipes/pipes.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { PipesModule } from 'src/app/commons/pipes/pipes.module';
+import { CoursesService } from 'src/app/commons/services/courses.service';
 
 @NgModule({
   declarations: [CourseEditComponent],

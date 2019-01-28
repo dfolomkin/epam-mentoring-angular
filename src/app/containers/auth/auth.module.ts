@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AuthComponent } from './auth.component';
 
-import { AuthService } from '../../commons/services/auth.service';
+import { AuthService } from 'src/app/commons/services/auth.service';
 
 @NgModule({
   declarations: [AuthComponent],

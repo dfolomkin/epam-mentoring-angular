@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { CoursesService } from '../../commons/services/courses.service';
-import { ICourse } from '../../commons/interfaces/course.interface';
+import { CoursesService } from 'src/app/commons/services/courses.service';
+import { ICourse } from 'src/app/commons/interfaces/course.interface';
 
 @Component({
   selector: 'app-course-edit',

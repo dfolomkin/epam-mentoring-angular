@@ -1,10 +1,9 @@
 import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { CoursesService } from '../../commons/services/courses.service';
-
-import { SearchService } from '../../commons/services/search.service';
-import { ICourse } from '../../commons/interfaces/course.interface';
+import { CoursesService } from 'src/app/commons/services/courses.service';
+import { SearchService } from 'src/app/commons/services/search.service';
+import { ICourse } from 'src/app/commons/interfaces/course.interface';
 
 export const NO_DATA_PLACEHOLDER = 'No data. Feel free to add new course.';
 

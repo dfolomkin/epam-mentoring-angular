@@ -29,12 +29,12 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  // it(`should have as title 'epm-angular'`, () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.debugElement.componentInstance;
-  //   console.log(app);
-  //   expect(app.title).toEqual('epm-angular');
-  // });
+  xit(`should have as title 'epm-angular'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    console.log(app);
+    expect(app.title).toEqual('epm-angular');
+  });
 
   it('should render div.app-container', () => {
     const fixture = TestBed.createComponent(AppComponent);

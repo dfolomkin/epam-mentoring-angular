@@ -1,56 +1,41 @@
 import { AuthService, IAuthPair } from './auth.service';
 
-fdescribe('AuthService', () => {
+describe('AuthService', () => {
   let service: AuthService;
   const authPairMock: IAuthPair = { login: 'user', password: 'pass' };
 
   beforeEach(() => {
     service = new AuthService();
-    service.authPair = undefined;
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('should have a method to check whether the user logged in or not', () => {
+    expect(service.isAuthed).toBeDefined();
   });
 
-  describe('#login()', () => {
-    it('should update auth pair', () => {
-      service.login(authPairMock);
-
-      expect(service.authPair).toEqual(authPairMock);
-    });
+  it('by default user should not be logged in', () => {
+    expect(service.isAuthed()).toEqual(false);
   });
 
-  describe('#logout()', () => {
-    it('should reset auth pair', () => {
-      service.authPair = { ...authPairMock };
-      service.logout();
-
-      expect(service.authPair).toBe(undefined);
-    });
+  it('should be able to log the user in with good credentials', () => {
+    service.login(authPairMock);
+    expect(service.isAuthed()).toEqual(true);
   });
 
-  describe('#getUserInfo()', () => {
-    it('should return undefined if login hasnt been done', () => {
-      expect(service.getUserInfo()).toBe(undefined);
-    });
-
-    it('should return user login if login has been done', () => {
-      service.login(authPairMock);
-
-      expect(service.getUserInfo()).toBe('user');
-    });
+  xit('should do something with bad credentials', () => {
+    expect(service.login({ login: 'user', password: '' })).toThrow();
   });
 
-  describe('#isAuthed()', () => {
-    it('should return false if login hasnt been done', () => {
-      expect(service.isAuthed()).toBe(false);
-    });
+  it('should be able to log the user out', () => {
+    service.login(authPairMock);
+    expect(service.isAuthed()).toEqual(true);
+    service.logout();
+    expect(service.isAuthed()).toEqual(false);
+  });
 
-    it('should return true if login has been done', () => {
-      service.login(authPairMock);
-
-      expect(service.isAuthed()).toBe(true);
-    });
+  it('should be able to return correct user name', () => {
+    service.login(authPairMock);
+    expect(service.getUserInfo()).toBe('user');
+    service.logout();
+    expect(service.getUserInfo()).toBe(undefined);
   });
 });

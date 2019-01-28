@@ -6,8 +6,7 @@ import { includes } from 'lodash';
 import { CourseCardComponent } from './course-card.component';
 
 import { CourseCardBorderDirective } from './directives/course-card-border.directive';
-import { ICourse } from '../../commons/constants';
-import { ControlBarComponent } from '../control-bar/control-bar.component';
+import { ICourse } from 'src/app/commons/interfaces/course.interface';
 
 describe('CourseCardComponent-Stand-Alone', () => {
   let component: CourseCardComponent;

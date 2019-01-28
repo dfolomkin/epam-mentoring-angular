@@ -13,17 +13,15 @@ courses / courses-edit + add constants
 
 # QUESTIONS
 
-is it possible to use @Input callback instead of @Output eventEmitter?
-should we do this?
+how to override pipes providers? witout mocking full pipe?
 
-how to route modules instead of components?
-how to protect router by auth (not only protected button click and go)?
+is it possible to use @Input callback instead of @Output eventEmitter? - yes
+should we do this? - no, use convention with @Output eventEmitter
 
 ngModule providers vs Components providers
 read more about forRoot
 providedIn: 'root'
 
-test click: fire class method (spyOn(component, 'onClick')) or something in it?
-how to override pipes providers? witout mocking full pipe?
+how to test onPush strategy? - onPush doesn't work with mutation via @Output eventEmitter
 
-how to test onPush strategy?
+how to protect router by auth (not only protected button click and go)?

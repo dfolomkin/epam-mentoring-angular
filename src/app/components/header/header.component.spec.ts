@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
 
-import { LogoModule } from '../logo/logo.module';
+import { LogoModule } from 'src/app/components/logo/logo.module';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;

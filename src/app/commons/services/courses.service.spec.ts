@@ -1,8 +1,8 @@
 import { CoursesService, getNewId } from './courses.service';
 
-import { ICourse } from '../interfaces/course.interface';
+import { ICourse } from 'src/app/commons/interfaces/course.interface';
 
-fdescribe('CoursesService', () => {
+describe('CoursesService', () => {
   let service: CoursesService;
   const coursesMock: ICourse[] = [
     { id: 1, title: 'Course1' },

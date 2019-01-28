@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { ICourse } from '../interfaces/course.interface';
+import { ICourse } from 'src/app/commons/interfaces/course.interface';
 
 @Pipe({
   name: 'orderByDate'

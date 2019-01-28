@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { remove, isEmpty } from 'lodash';
 
-import { getSequence } from '../constants';
+import { getSequence } from 'src/app/commons/constants';
 
 export interface IAuthPair {
   login: string;

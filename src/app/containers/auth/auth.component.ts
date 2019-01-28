@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService, IAuthPair } from '../../commons/services/auth.service';
+import { AuthService, IAuthPair } from 'src/app/commons/services/auth.service';
 
 @Component({
   selector: 'app-auth',

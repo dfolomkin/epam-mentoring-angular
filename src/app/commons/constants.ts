@@ -1,6 +1,6 @@
-import { ICourse } from './interfaces/course.interface';
+import { ICourse } from 'src/app/commons/interfaces/course.interface';
 
-export const coursesMock: ICourse[] = [
+export const COURSES: ICourse[] = [
   {
     id: 1,
     title: 'Bitchip',
@@ -88,7 +88,7 @@ export const getSequence: (length?: number) => string = (lenght = 7) =>
     .toString(36)
     .substring(lenght);
 
-export const routesMap = {
+export const ROUTES_MAP = {
   courses: 'courses',
   courseEdit: 'course-edit',
   auth: 'auth'

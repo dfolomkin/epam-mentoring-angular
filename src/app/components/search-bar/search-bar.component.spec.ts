@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 
 import { SearchBarComponent } from './search-bar.component';
 
-import { SearchService } from '../../commons/services/search.service';
+import { SearchService } from 'src/app/commons/services/search.service';
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;

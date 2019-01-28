@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { HeaderComponent } from './header.component';
 
-import { LogoModule } from '../logo/logo.module';
-import { AuthService } from '../../commons/services/auth.service';
-import { AppRoutingModule } from '../../app-routing.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { LogoModule } from 'src/app/components/logo/logo.module';
+import { AuthService } from 'src/app/commons/services/auth.service';
 
 @NgModule({
   declarations: [HeaderComponent],

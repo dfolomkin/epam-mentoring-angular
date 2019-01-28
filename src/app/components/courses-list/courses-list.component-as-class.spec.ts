@@ -1,8 +1,8 @@
 import { CoursesListComponent } from './courses-list.component';
 
-import { CoursesService } from '../../commons/services/courses.service';
-import { SearchService } from '../../commons/services/search.service';
-import { ICourse } from '../../commons/interfaces/course.interface';
+import { CoursesService } from 'src/app/commons/services/courses.service';
+import { SearchService } from 'src/app/commons/services/search.service';
+import { ICourse } from 'src/app/commons/interfaces/course.interface';
 
 describe('CoursesListComponent-As-Class', () => {
   let component: CoursesListComponent;
