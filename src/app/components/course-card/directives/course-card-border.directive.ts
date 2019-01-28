@@ -12,7 +12,7 @@ export const CLASSES = {
 })
 export class CourseCardBorderDirective implements OnInit {
   @Input('appCourseCardBorder')
-  courseDate;
+  courseDate: Date;
 
   constructor(private elem: ElementRef) {}
 

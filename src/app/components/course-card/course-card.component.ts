@@ -7,6 +7,8 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
+import { ICourse } from '../../commons/interfaces/course.interface';
+
 @Component({
   selector: 'app-course-card',
   templateUrl: './course-card.component.html',
@@ -15,7 +17,7 @@ import {
 })
 export class CourseCardComponent implements OnInit {
   @Input()
-  course;
+  course: ICourse;
 
   @Output()
   clickEvent = new EventEmitter();

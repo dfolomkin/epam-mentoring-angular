@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LogoComponent implements OnInit {
   @Input()
-  brand;
+  brand: string;
 
   constructor() {}
 
