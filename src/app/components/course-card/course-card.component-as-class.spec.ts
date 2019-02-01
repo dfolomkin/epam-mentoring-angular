@@ -13,7 +13,7 @@ describe('CourseCardComponent-As-Class', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('onDeleteClick()', () => {
+  describe('#onDeleteClick()', () => {
     it('should fire this.clickEvent', () => {
       const emitSpy: jasmine.Spy = spyOn(component.clickEvent, 'emit');
       component.course = {

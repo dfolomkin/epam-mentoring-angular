@@ -11,7 +11,7 @@ describe('CoursesService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('getSearchQuery()', () => {
+  describe('#getSearchQuery()', () => {
     it('should set seachQuerySourse and provide its value to subscribers', () => {
       const searchQueryMock = 'test';
       let searchQuery: string;

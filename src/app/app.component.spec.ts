@@ -7,6 +7,7 @@ import { BreadcrumbsModule } from './components/breadcrumbs/breadcrumbs.module';
 import { FooterModule } from './components/footer/footer.module';
 import { CoursesModule } from './containers/courses/courses.module';
 import { CourseEditModule } from './containers/course-edit/course-edit.module';
+import { AuthModule } from './containers/auth/auth.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -17,7 +18,8 @@ describe('AppComponent', () => {
         BreadcrumbsModule,
         FooterModule,
         CoursesModule,
-        CourseEditModule
+        CourseEditModule,
+        AuthModule
       ],
       declarations: [AppComponent]
     }).compileComponents();
@@ -32,7 +34,6 @@ describe('AppComponent', () => {
   xit(`should have as title 'epm-angular'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    console.log(app);
     expect(app.title).toEqual('epm-angular');
   });
 

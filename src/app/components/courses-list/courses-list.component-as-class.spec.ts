@@ -1,3 +1,5 @@
+import { remove } from 'lodash';
+
 import { CoursesListComponent } from './courses-list.component';
 
 import { CoursesService } from 'src/app/commons/services/courses.service';
@@ -7,9 +9,10 @@ import { ICourse } from 'src/app/commons/interfaces/course.interface';
 describe('CoursesListComponent-As-Class', () => {
   let component: CoursesListComponent;
 
-  let coursesMock;
+  let coursesMock: ICourse[];
   const coursesServiceMock: Partial<CoursesService> = {
-    getCourses: () => coursesMock
+    getCourses: () => coursesMock,
+    deleteCourse: id => remove(coursesMock, item => item.id === id)
   };
   let searchService: SearchService;
 
@@ -38,7 +41,7 @@ describe('CoursesListComponent-As-Class', () => {
     expect(component.searchQuery).toBe(searchQueryMock);
   });
 
-  describe('ngOnInit()', () => {
+  describe('#ngOnInit()', () => {
     it('should fill this.courses', () => {
       component.ngOnInit();
 
@@ -46,7 +49,7 @@ describe('CoursesListComponent-As-Class', () => {
     });
   });
 
-  describe('onChildDelete(id)', () => {
+  describe('#onChildDelete(id)', () => {
     it('should delete pointed course', () => {
       component.ngOnInit();
       component.onChildDelete(3);

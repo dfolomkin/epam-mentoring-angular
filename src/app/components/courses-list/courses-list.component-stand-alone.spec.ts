@@ -1,6 +1,7 @@
 import { DebugElement, Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { remove } from 'lodash';
 
 import { CoursesListComponent } from './courses-list.component';
 
@@ -16,7 +17,8 @@ describe('CoursesListComponent-Stand-Alone', () => {
 
   let coursesMock: ICourse[];
   const coursesServiceMock: Partial<CoursesService> = {
-    getCourses: () => coursesMock
+    getCourses: () => coursesMock,
+    deleteCourse: id => remove(coursesMock, item => item.id === id)
   };
 
   @Pipe({ name: 'filter' })
@@ -71,7 +73,7 @@ describe('CoursesListComponent-Stand-Alone', () => {
       compiled = fixture.nativeElement;
     });
 
-    it('should render right quantity of course-cards', () => {
+    it('should render correct quantity of course-cards', () => {
       expect(compiled.querySelectorAll('app-course-card').length).toBe(
         coursesMock.length
       );

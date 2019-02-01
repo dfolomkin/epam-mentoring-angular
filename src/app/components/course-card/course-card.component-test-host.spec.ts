@@ -1,12 +1,14 @@
 import { Component, OnInit, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { CourseCardComponent } from './course-card.component';
 
 import { CourseCardModule } from './course-card.module';
 import { CoursesService } from 'src/app/commons/services/courses.service';
 import { ICourse } from 'src/app/commons/interfaces/course.interface';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 describe('CourseCardComponent-Test-Host', () => {
   let fixture: ComponentFixture<TestHostComponent>;
@@ -47,7 +49,7 @@ describe('CourseCardComponent-Test-Host', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TestHostComponent],
-      imports: [CourseCardModule],
+      imports: [RouterTestingModule, AppRoutingModule, CourseCardModule],
       providers: [CoursesServiceMock]
     }).compileComponents();
   }));
@@ -69,7 +71,7 @@ describe('CourseCardComponent-Test-Host', () => {
       compiled = fixture.nativeElement;
     });
 
-    it('should render right quantity of course-cards', () => {
+    it('should render correct quantity of course-cards', () => {
       expect(compiled.querySelectorAll('app-course-card').length).toBe(
         coursesMock.length
       );
