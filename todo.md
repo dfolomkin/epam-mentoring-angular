@@ -1,19 +1,14 @@
 # TODO
 
-test router
-directive as test host (need help)
 search component? - yes
 test filter, order in list or only pipes? - yes
-
-need auth to add course and edit course
-
-do correct breadcrumbs
-
-courses / courses-edit + add constants
+directive as test host (need help)
+some troubles with test-host and app-routing.module
+test router
 
 # QUESTIONS
 
-how to override pipes providers? witout mocking full pipe?
+how to override pipes providers? w/o mocking full pipe?
 
 is it possible to use @Input callback instead of @Output eventEmitter? - yes
 should we do this? - no, use convention with @Output eventEmitter
@@ -24,4 +19,4 @@ providedIn: 'root'
 
 how to test onPush strategy? - onPush doesn't work with mutation via @Output eventEmitter
 
-how to protect router by auth (not only protected button click and go)?
+how to protect router by auth? - with guards

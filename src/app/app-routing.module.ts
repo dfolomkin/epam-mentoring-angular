@@ -6,11 +6,23 @@ import { CoursesComponent } from './containers/courses/courses.component';
 import { CourseEditComponent } from './containers/course-edit/course-edit.component';
 import { AuthComponent } from './containers/auth/auth.component';
 import { NotFoundComponent } from './containers/not-found/not-found.component';
+import { CanActivateGuard } from './guards/can-activate.guard';
+import { CanLoadGuard } from './guards/can-load.guard';
 
 const routes: Routes = [
   { path: ROUTES_MAP.courses, component: CoursesComponent },
-  { path: `${ROUTES_MAP.courses}/new`, component: CourseEditComponent },
-  { path: `${ROUTES_MAP.courses}/:id`, component: CourseEditComponent },
+  {
+    path: `${ROUTES_MAP.courses}/new`,
+    component: CourseEditComponent,
+    canActivate: [CanActivateGuard],
+    canLoad: [CanLoadGuard]
+  },
+  {
+    path: `${ROUTES_MAP.courses}/:id`,
+    component: CourseEditComponent,
+    canActivate: [CanActivateGuard],
+    canLoad: [CanLoadGuard]
+  },
   { path: ROUTES_MAP.auth, component: AuthComponent },
   { path: '', redirectTo: `/${ROUTES_MAP.courses}`, pathMatch: 'full' },
   { path: '**', component: NotFoundComponent }
