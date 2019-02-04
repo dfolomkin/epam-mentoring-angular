@@ -9,6 +9,7 @@ import { FooterModule } from './components/footer/footer.module';
 import { CoursesModule } from './containers/courses/courses.module';
 import { CourseEditModule } from './containers/course-edit/course-edit.module';
 import { AuthModule } from './containers/auth/auth.module';
+import { NotFoundModule } from './containers/not-found/not-found.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,8 @@ import { AuthModule } from './containers/auth/auth.module';
     FooterModule,
     CoursesModule,
     CourseEditModule,
-    AuthModule
+    AuthModule,
+    NotFoundModule
   ],
   providers: [],
   bootstrap: [AppComponent]

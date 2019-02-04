@@ -90,6 +90,6 @@ export const getSequence: (length?: number) => string = (lenght = 7) =>
 
 export const ROUTES_MAP = {
   courses: 'courses',
-  courseEdit: 'course-edit',
+  addNew: 'new',
   auth: 'auth'
 };

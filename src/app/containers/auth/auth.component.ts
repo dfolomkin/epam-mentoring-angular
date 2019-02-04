@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService, IAuthPair } from 'src/app/commons/services/auth.service';
+import { ROUTES_MAP } from 'src/app/commons/constants';
 
 @Component({
   selector: 'app-auth',
@@ -19,7 +20,7 @@ export class AuthComponent implements OnInit {
 
   onLoginClick() {
     this.authService.login(this.authPair);
-    this.router.navigate(['/']);
+    this.router.navigateByUrl('/' + ROUTES_MAP.courses);
     console.log('Login has been done.');
   }
 }

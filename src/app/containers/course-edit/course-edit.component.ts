@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { CoursesService } from 'src/app/commons/services/courses.service';
 import { ICourse } from 'src/app/commons/interfaces/course.interface';
+import { ROUTES_MAP } from 'src/app/commons/constants';
 
 @Component({
   selector: 'app-course-edit',
@@ -23,13 +24,20 @@ export class CourseEditComponent implements OnInit {
 
     if (id !== undefined) {
       this.course = this.coursesService.getCourseById(id) as ICourse;
-      console.log(this.course);
     }
   }
 
   onSaveClick() {
-    this.coursesService.createCourse(this.course);
-    this.router.navigate(['/courses']);
-    console.log('New course has been added.');
+    const path = this.route.snapshot.routeConfig.path;
+    const isNew = path.indexOf(ROUTES_MAP.addNew) !== -1;
+
+    if (isNew) {
+      this.coursesService.createCourse(this.course);
+      console.log('New course has been added.');
+    } else {
+      this.coursesService.updateCourse(this.course.id, this.course);
+      console.log(`Course with id = ${this.course.id} has been updated.`);
+    }
+    this.router.navigateByUrl('/' + ROUTES_MAP.courses);
   }
 }

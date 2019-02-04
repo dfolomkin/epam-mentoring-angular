@@ -1,4 +1,14 @@
-<nav *ngIf="authService.isAuthed()" class="simple-breadcrumbs">
-  <a routerLink="/courses" routerLinkActive="active">Courses</a> /
-  <a routerLink="/course-edit" routerLinkActive="active">Course-edit</a>
+<nav class="simple-breadcrumbs">
+  <a
+    *ngFor="let chunk of routeChunks; last as isLast"
+    [class.disabled]="isLast"
+    [routerLink]="!isLast ? '/' + chunk.toLowerCase() : ''"
+    >{{ chunk }} <span *ngIf="!isLast">/ </span>
+  </a>
+  <!-- <a
+    *ngIf="authService.isAuthed()"
+    routerLink="/course-edit"
+    routerLinkActive="active"
+    >Course-edit</a
+  > -->
 </nav>
