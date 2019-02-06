@@ -1,10 +1,18 @@
 <div class="control-bar">
-  <app-filter-bar></app-filter-bar>
-  <a
-    class="btn waves-effect waves-light"
-    routerLink="/courses/new"
-    routerLinkActive="active"
-  >
-    Add course <i class="material-icons left">add</i>
-  </a>
+  <div class="row1">
+    <app-search-bar></app-search-bar>
+    <app-data-count-switch></app-data-count-switch>
+  </div>
+  <div class="row2">
+    <app-filter-bar></app-filter-bar>
+    <div>
+      <a
+        class="btn waves-effect waves-light"
+        routerLink="/courses/new"
+        routerLinkActive="active"
+      >
+        Add course <i class="material-icons left">add</i>
+      </a>
+    </div>
+  </div>
 </div>

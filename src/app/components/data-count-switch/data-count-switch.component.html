@@ -1,0 +1,17 @@
+<div class="data-count-switch">
+  <span class="data-count-switch__item">Results:</span>
+  <label
+    *ngFor="let option of dataCountOptions; trackBy: option"
+    class="data-count-switch__item"
+  >
+    <input
+      type="radio"
+      [value]="option"
+      [checked]="option === dataCount"
+      [(ngModel)]="dataCount"
+      name="data-count"
+      (change)="onChange()"
+    />
+    <span>{{ option }}</span>
+  </label>
+</div>

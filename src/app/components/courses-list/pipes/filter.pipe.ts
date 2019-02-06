@@ -4,13 +4,12 @@ import { ICourse } from 'src/app/commons/interfaces/course.interface';
 
 @Pipe({ name: 'filter' })
 export class FilterPipe implements PipeTransform {
-  transform(courses: ICourse[], filterQuery: string): ICourse[] {
-    if (!filterQuery) {
+  transform(courses: ICourse[], query: string): ICourse[] {
+    if (!query) {
       return courses;
     }
     return courses.filter(
-      course =>
-        course.title.toLowerCase().indexOf(filterQuery.toLowerCase()) !== -1
+      course => course.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
     );
   }
 }

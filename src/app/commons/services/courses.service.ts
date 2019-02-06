@@ -22,9 +22,15 @@ export class CoursesService {
     return this.http.get<ICourse[]>(`${BACK_URL}/${ROUTES_MAP.courses}`);
   }
 
-  getCoursesWithParams(start: number, count: number): Observable<ICourse[]> {
+  getCoursesByParams(
+    query: string,
+    start: number,
+    count: number
+  ): Observable<ICourse[]> {
     return this.http.get<ICourse[]>(
-      `${BACK_URL}/${ROUTES_MAP.courses}?start=${start}&count=${count}`
+      `${BACK_URL}/${ROUTES_MAP.courses}?${
+        query ? 'query=' + query + '&' : ''
+      }start=${start}&count=${count}`
     );
   }
 
@@ -47,9 +53,7 @@ export class CoursesService {
     return this.courses;
   }
 
-  deleteCourse(id: number): ICourse[] {
-    remove(this.courses, item => item.id === id);
-
-    return this.courses;
+  deleteCourse(id: number): Observable<{}> {
+    return this.http.delete<{}>(`${BACK_URL}/${ROUTES_MAP.courses}/${id}`);
   }
 }

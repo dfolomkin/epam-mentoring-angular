@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FilterService } from 'src/app/commons/services/filter.service';
+import { StoreService } from 'src/app/commons/services/store.service';
 
 @Component({
   selector: 'app-filter-bar',
@@ -10,11 +10,11 @@ import { FilterService } from 'src/app/commons/services/filter.service';
 export class FilterBarComponent implements OnInit {
   filterQuery: string;
 
-  constructor(private filterService: FilterService) {}
+  constructor(private storeService: StoreService) {}
 
   ngOnInit() {}
 
   onInputKeyUp() {
-    this.filterService.setFilterQuery(this.filterQuery);
+    this.storeService.set('filterQuery', this.filterQuery);
   }
 }

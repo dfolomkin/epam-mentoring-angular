@@ -4,10 +4,8 @@
     [course]="course"
     (clickEvent)="onChildDelete($event)"
   ></app-course-card>
-  <div class="load-more-bar">
-    <button type="button" class="btn waves-effect waves-light">
-      Load more
-    </button>
+  <div *ngIf="courses.length >= dataCount" class="load-more-bar">
+    <app-load-more-button></app-load-more-button>
   </div>
 </div>
 <div *ngIf="courses && !courses.length" class="no-data-placeholder">

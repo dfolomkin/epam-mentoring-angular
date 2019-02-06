@@ -5,10 +5,18 @@ import { ControlBarComponent } from './control-bar.component';
 
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FilterBarModule } from 'src/app/components/filter-bar/filter-bar.module';
+import { SearchBarModule } from 'src/app/components/search-bar/search-bar.module';
+import { DataCountSwitchModule } from 'src/app/components/data-count-switch/data-count-switch.module';
 
 @NgModule({
   declarations: [ControlBarComponent],
-  imports: [CommonModule, AppRoutingModule, FilterBarModule],
+  imports: [
+    CommonModule,
+    AppRoutingModule,
+    FilterBarModule,
+    SearchBarModule,
+    DataCountSwitchModule
+  ],
   exports: [ControlBarComponent],
   bootstrap: [ControlBarComponent]
 })

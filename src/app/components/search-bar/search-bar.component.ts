@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SearchService } from 'src/app/commons/services/search.service';
+import { StoreService } from 'src/app/commons/services/store.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -8,17 +8,13 @@ import { SearchService } from 'src/app/commons/services/search.service';
   styleUrls: ['./search-bar.component.less']
 })
 export class SearchBarComponent implements OnInit {
-  searchString: string;
+  searchQuery: string;
 
-  constructor(private searchService: SearchService) {}
+  constructor(private storeService: StoreService) {}
 
   ngOnInit() {}
 
   onSearchClick() {
-    this.searchService.setSearchQuery(this.searchString);
-  }
-
-  onInputKeyUp() {
-    this.searchService.setSearchQuery(this.searchString);
+    this.storeService.set('searchQuery', this.searchQuery);
   }
 }
