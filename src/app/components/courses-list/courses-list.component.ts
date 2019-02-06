@@ -16,26 +16,32 @@ export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
   courses: ICourse[];
   noDataPlaceholder = NO_DATA_PLACEHOLDER;
   searchQuery: string;
-  subscription: Subscription;
+  searchServiceSubscription: Subscription;
+  getCourseSubscription: Subscription;
 
   constructor(
     private coursesService: CoursesService,
     private searchService: SearchService
   ) {
     this.searchQuery = '';
-    this.subscription = searchService.searchQuerySourse.subscribe(query => {
-      this.searchQuery = query;
-    });
+    this.searchServiceSubscription = searchService.searchQuerySourse.subscribe(
+      query => {
+        this.searchQuery = query;
+      }
+    );
   }
 
   ngOnInit() {
-    this.courses = this.coursesService.getCourses();
+    this.getCourseSubscription = this.coursesService
+      .getCourses()
+      .subscribe((data: ICourse[]) => (this.courses = data));
   }
 
   ngOnChanges() {}
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.searchServiceSubscription.unsubscribe();
+    this.getCourseSubscription.unsubscribe();
   }
 
   onChildDelete(id: number) {

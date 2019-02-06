@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { max, remove } from 'lodash';
 
-import { COURSES } from 'src/app/commons/constants';
+import { BACK_URL, ROUTES_MAP } from 'src/app/commons/constants';
 import { ICourse } from 'src/app/commons/interfaces/course.interface';
 
 export const getNewId = (courses: ICourse[]): number => {
@@ -14,12 +16,16 @@ export const getNewId = (courses: ICourse[]): number => {
 export class CoursesService {
   courses: ICourse[];
 
-  constructor() {
-    this.courses = COURSES;
+  constructor(private http: HttpClient) {}
+
+  getCourses(): Observable<ICourse[]> {
+    return this.http.get<ICourse[]>(`${BACK_URL}/${ROUTES_MAP.courses}`);
   }
 
-  getCourses(): ICourse[] {
-    return this.courses;
+  getCoursesWithParams(start: number, count: number): Observable<ICourse[]> {
+    return this.http.get<ICourse[]>(
+      `${BACK_URL}/${ROUTES_MAP.courses}?start=${start}&count=${count}`
+    );
   }
 
   getCourseById(id: number): ICourse | {} {
