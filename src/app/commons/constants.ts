@@ -94,4 +94,6 @@ export const ROUTES_MAP = {
   auth: 'auth'
 };
 
+export const NO_DATA_PLACEHOLDER = 'No data. Feel free to add new one.';
+
 export const BACK_URL = 'http://localhost:3000/api';

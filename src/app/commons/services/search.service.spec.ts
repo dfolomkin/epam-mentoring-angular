@@ -15,8 +15,8 @@ describe('CoursesService', () => {
     it('should set seachQuerySourse and provide its value to subscribers', () => {
       const searchQueryMock = 'test';
       let searchQuery: string;
-      const subscpiption = service.searchQuerySourse.subscribe(search => {
-        searchQuery = search;
+      const subscpiption = service.searchQuerySourse.subscribe(query => {
+        searchQuery = query;
       });
 
       service.setSearchQuery(searchQueryMock);

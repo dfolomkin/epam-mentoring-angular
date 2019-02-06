@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { ControlBarComponent } from './control-bar.component';
 
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { SearchBarModule } from 'src/app/components/search-bar/search-bar.module';
+import { FilterBarModule } from 'src/app/components/filter-bar/filter-bar.module';
 
 @NgModule({
   declarations: [ControlBarComponent],
-  imports: [CommonModule, AppRoutingModule, SearchBarModule],
+  imports: [CommonModule, AppRoutingModule, FilterBarModule],
   exports: [ControlBarComponent],
   bootstrap: [ControlBarComponent]
 })

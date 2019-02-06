@@ -1,32 +1,32 @@
-import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { CoursesService } from 'src/app/commons/services/courses.service';
-import { SearchService } from 'src/app/commons/services/search.service';
+import { FilterService } from 'src/app/commons/services/filter.service';
 import { ICourse } from 'src/app/commons/interfaces/course.interface';
-
-export const NO_DATA_PLACEHOLDER = 'No data. Feel free to add new course.';
+import { NO_DATA_PLACEHOLDER } from 'src/app/commons/constants';
 
 @Component({
   selector: 'app-courses-list',
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.less']
 })
-export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
+export class CoursesListComponent implements OnInit, OnDestroy {
   courses: ICourse[];
-  noDataPlaceholder = NO_DATA_PLACEHOLDER;
-  searchQuery: string;
-  searchServiceSubscription: Subscription;
+  filterQuery: string;
+  filterServiceSubscription: Subscription;
   getCourseSubscription: Subscription;
+
+  noDataPlaceholder = NO_DATA_PLACEHOLDER;
 
   constructor(
     private coursesService: CoursesService,
-    private searchService: SearchService
+    private filterService: FilterService
   ) {
-    this.searchQuery = '';
-    this.searchServiceSubscription = searchService.searchQuerySourse.subscribe(
+    this.filterQuery = '';
+    this.filterServiceSubscription = filterService.filterQuerySourse.subscribe(
       query => {
-        this.searchQuery = query;
+        this.filterQuery = query;
       }
     );
   }
@@ -37,10 +37,8 @@ export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe((data: ICourse[]) => (this.courses = data));
   }
 
-  ngOnChanges() {}
-
   ngOnDestroy() {
-    this.searchServiceSubscription.unsubscribe();
+    this.filterServiceSubscription.unsubscribe();
     this.getCourseSubscription.unsubscribe();
   }
 
