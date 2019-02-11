@@ -36,7 +36,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
             this.routeChunks[0] === ROUTES_MAP.courses &&
             this.routeChunks[1]
           ) {
-            if (this.routeChunks[1] === ROUTES_MAP.addNew) {
+            if (this.routeChunks[1] === ROUTES_MAP.newId) {
               this.routeChunks[1] = 'new video course';
             } else if (!isNaN(+this.routeChunks[1])) {
               this.routeChunks[1] = `video course ${this.routeChunks[1]}`;

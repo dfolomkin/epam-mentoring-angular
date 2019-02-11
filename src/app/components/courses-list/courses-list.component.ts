@@ -76,7 +76,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   }
 
   onChildDelete(id: number) {
-    if (confirm('Do you really want to delete this course?')) {
+    if (confirm(`Do you really want to delete this course with id = ${id}?`)) {
       this.deleteCourseSubscription = this.coursesService
         .deleteCourse(id)
         .subscribe(() => {

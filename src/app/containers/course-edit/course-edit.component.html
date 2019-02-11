@@ -44,7 +44,7 @@
         [(ngModel)]="course.duration"
         name="duration"
       />
-      {{ course.duration | duration }}
+      {{ course && course.duration | duration }}
     </div>
     <div class="control-group">
       <label for="form_author">Author:</label>
@@ -53,6 +53,7 @@
         placeholder="Author"
         type="text"
         class="validate"
+        [(ngModel)]="course.author"
         name="author"
       />
     </div>

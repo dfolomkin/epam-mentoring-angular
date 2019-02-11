@@ -7,7 +7,8 @@ server.use(middlewares);
 
 server.get('/api/courses', (req, res) => {
   const isEmpty = require('./utils.js').isEmpty;
-  let courses = require('./db.json').courses;
+  const fs = require('fs');
+  let courses = JSON.parse(fs.readFileSync('./db.json', 'utf8')).courses;
 
   if (isEmpty(req.query)) {
     res.send(courses);
@@ -29,7 +30,6 @@ server.get('/api/courses', (req, res) => {
   }
 });
 
-server.use(jsonServer.bodyParser);
 server.use('/api', router);
 
 const port = 3000;

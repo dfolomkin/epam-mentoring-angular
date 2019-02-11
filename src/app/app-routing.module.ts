@@ -12,12 +12,6 @@ import { CanLoadGuard } from './guards/can-load.guard';
 const routes: Routes = [
   { path: ROUTES_MAP.courses, component: CoursesComponent },
   {
-    path: `${ROUTES_MAP.courses}/new`,
-    component: CourseEditComponent,
-    canActivate: [CanActivateGuard],
-    canLoad: [CanLoadGuard]
-  },
-  {
     path: `${ROUTES_MAP.courses}/:id`,
     component: CourseEditComponent,
     canActivate: [CanActivateGuard],

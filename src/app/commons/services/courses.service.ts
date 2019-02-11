@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { max, remove } from 'lodash';
+import { Observable, Subscription } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
+import { max } from 'lodash';
 
 import { BACK_URL, ROUTES_MAP } from 'src/app/commons/constants';
 import { ICourse } from 'src/app/commons/interfaces/course.interface';
 
 export const getNewId = (courses: ICourse[]): number => {
-  const ids = courses.map(item => item.id);
+  const ids = courses && courses.map(item => item.id);
 
-  return ids.length ? max(ids) + 1 : 1;
+  return ids && ids.length ? max(ids) + 1 : 1;
 };
 
 @Injectable()
 export class CoursesService {
-  courses: ICourse[];
+  getCoursesSubscription: Subscription;
 
   constructor(private http: HttpClient) {}
 
@@ -34,23 +35,32 @@ export class CoursesService {
     );
   }
 
-  getCourseById(id: number): ICourse | {} {
-    return this.courses.find(item => item.id === id) || {};
+  getCourseById(id: number): Observable<ICourse | {}> {
+    return this.http.get<ICourse | {}>(
+      `${BACK_URL}/${ROUTES_MAP.courses}/${id}`
+    );
   }
 
-  createCourse(course: Partial<ICourse>): ICourse[] {
-    const newCourse = { id: getNewId(this.courses), ...course } as ICourse;
-    this.courses.push(newCourse);
+  createCourse(course: Partial<ICourse>): Observable<{}> {
+    const postObservable = this.getCourses().pipe(
+      mergeMap((courses: ICourse[]) => {
+        const newCourse = { id: getNewId(courses), ...course };
 
-    return this.courses;
-  }
-
-  updateCourse(id: number, course: Partial<ICourse>): ICourse[] {
-    this.courses = this.courses.map(item =>
-      item.id === id ? { ...item, ...course } : item
+        return this.http.post<{}>(
+          `${BACK_URL}/${ROUTES_MAP.courses}`,
+          newCourse
+        );
+      })
     );
 
-    return this.courses;
+    return postObservable;
+  }
+
+  updateCourse(course: ICourse): Observable<{}> {
+    return this.http.put<{}>(
+      `${BACK_URL}/${ROUTES_MAP.courses}/${course.id}`,
+      course
+    );
   }
 
   deleteCourse(id: number): Observable<{}> {
