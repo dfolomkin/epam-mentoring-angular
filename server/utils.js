@@ -1,1 +1,4 @@
-module.exports.isEmpty = obj => Object.keys(obj).length === 0;
+module.exports.getSequence = length =>
+  Math.random()
+    .toString(36)
+    .substr(2, length);

@@ -5,13 +5,18 @@ test filter, order in list or only pipes? - yes
 directive as test host (need help)
 some troubles with test-host and app-routing.module
 test router
+pipes mocks module?
 
 ngIf Load More
 Author on the Card
-//unsubscrube
-error handling => no data
+http error handling => no data
+
 test coursesService
-tets storeService(filterService)
+test storeService(filterService)
+
+!!! //unsubscribe
+!!! refresh user name after login
+!!! http<any | void | ???>
 
 # QUESTIONS
 
@@ -32,4 +37,7 @@ how to protect router by auth? - with guards
 
 components inheritance
 
-async html w/o &&
+async html w/o && - for {{}} maybe async pipe
+but what for [(ngModel)] ?
+
+reed more about cold/hot observables

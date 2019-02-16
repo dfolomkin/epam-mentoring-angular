@@ -25,19 +25,20 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.course = {
+      title: '',
+      description: '',
+      date: new Date(),
+      duration: 0,
+      author: ''
+    };
+
     const id = this.route.snapshot.paramMap.get('id');
 
     if (!isNaN(+id)) {
       this.getCourseById(+id);
     } else if (id === ROUTES_MAP.newId) {
       this.isNew = true;
-      this.course = {
-        title: '',
-        description: '',
-        date: new Date(),
-        duration: 0,
-        author: ''
-      };
     }
   }
 

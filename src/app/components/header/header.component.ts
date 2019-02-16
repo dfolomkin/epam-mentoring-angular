@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
-import { AuthService } from 'src/app/commons/services/auth.service';
+import { AuthService, IAuthPair } from 'src/app/commons/services/auth.service';
 import { ROUTES_MAP } from 'src/app/commons/constants';
 
 @Component({
@@ -9,14 +10,29 @@ import { ROUTES_MAP } from 'src/app/commons/constants';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.less']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+  authPair: IAuthPair;
+  isAuthed: boolean;
+  getUserInfoSubscription: Subscription;
+  isAuthedSubscription: Subscription;
+
   constructor(public authService: AuthService, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.getUserInfo().subscribe((pair: IAuthPair) => {
+      this.authPair = pair;
+    });
+    this.authService.isAuthed().subscribe((res: boolean) => {
+      this.isAuthed = res;
+    });
+  }
+  ngOnDestroy() {
+    this.getUserInfoSubscription.unsubscribe();
+    this.isAuthedSubscription.unsubscribe();
+  }
 
   onLogoutClick() {
     this.authService.logout();
-    console.log('Logout has been done.');
     this.router.navigateByUrl('/' + ROUTES_MAP.auth);
   }
 }

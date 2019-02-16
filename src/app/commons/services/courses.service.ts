@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { retry, catchError, mergeMap } from 'rxjs/operators';
 import { max } from 'lodash';
 
 import { BACK_URL, ROUTES_MAP } from 'src/app/commons/constants';
@@ -20,7 +20,13 @@ export class CoursesService {
   constructor(private http: HttpClient) {}
 
   getCourses(): Observable<ICourse[]> {
-    return this.http.get<ICourse[]>(`${BACK_URL}/${ROUTES_MAP.courses}`);
+    return this.http.get<ICourse[]>(`${BACK_URL}/${ROUTES_MAP.courses}`).pipe(
+      retry(3),
+      catchError((err: HttpErrorResponse) => {
+        console.error(err.error);
+        return [];
+      })
+    );
   }
 
   getCoursesByParams(
@@ -28,11 +34,19 @@ export class CoursesService {
     start: number,
     count: number
   ): Observable<ICourse[]> {
-    return this.http.get<ICourse[]>(
-      `${BACK_URL}/${ROUTES_MAP.courses}?${
-        query ? 'query=' + query + '&' : ''
-      }start=${start}&count=${count}`
-    );
+    return this.http
+      .get<ICourse[]>(
+        `${BACK_URL}/${ROUTES_MAP.courses}?${
+          query ? 'query=' + query + '&' : ''
+        }start=${start}&count=${count}`
+      )
+      .pipe(
+        retry(3),
+        catchError((err: HttpErrorResponse) => {
+          console.error(err.error);
+          return [];
+        })
+      );
   }
 
   getCourseById(id: number): Observable<ICourse | {}> {
@@ -41,12 +55,12 @@ export class CoursesService {
     );
   }
 
-  createCourse(course: Partial<ICourse>): Observable<{}> {
+  createCourse(course: Partial<ICourse>): Observable<any> {
     const postObservable = this.getCourses().pipe(
       mergeMap((courses: ICourse[]) => {
         const newCourse = { id: getNewId(courses), ...course };
 
-        return this.http.post<{}>(
+        return this.http.post<any>(
           `${BACK_URL}/${ROUTES_MAP.courses}`,
           newCourse
         );
@@ -56,14 +70,14 @@ export class CoursesService {
     return postObservable;
   }
 
-  updateCourse(course: ICourse): Observable<{}> {
-    return this.http.put<{}>(
+  updateCourse(course: ICourse): Observable<any> {
+    return this.http.put<any>(
       `${BACK_URL}/${ROUTES_MAP.courses}/${course.id}`,
       course
     );
   }
 
-  deleteCourse(id: number): Observable<{}> {
-    return this.http.delete<{}>(`${BACK_URL}/${ROUTES_MAP.courses}/${id}`);
+  deleteCourse(id: number): Observable<any> {
+    return this.http.delete<any>(`${BACK_URL}/${ROUTES_MAP.courses}/${id}`);
   }
 }

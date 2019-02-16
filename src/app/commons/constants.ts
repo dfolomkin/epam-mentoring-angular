@@ -1,8 +1,3 @@
-export const getSequence: (length?: number) => string = (lenght = 7) =>
-  Math.random()
-    .toString(36)
-    .substring(lenght);
-
 export const ROUTES_MAP = {
   courses: 'courses',
   newId: 'new',

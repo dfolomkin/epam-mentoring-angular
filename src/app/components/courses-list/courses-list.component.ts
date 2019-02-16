@@ -19,6 +19,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   filterQuery: string;
   searchQuery: string;
   dataCount: number;
+  dataCountInc: number;
 
   filterServiceSubscription: Subscription;
   searchServiceSubscription: Subscription;
@@ -38,6 +39,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.dataCount = DATA_COUNT_OPTIONS[0];
+    this.dataCountInc = DATA_COUNT_OPTIONS[0];
 
     this.filterServiceSubscription = this.storeService.sourses.filterQuery.subscribe(
       (query: string): void => {
@@ -53,11 +55,12 @@ export class CoursesListComponent implements OnInit, OnDestroy {
     this.dataCountSubscription = this.storeService.sourses.dataCount.subscribe(
       (count: number): void => {
         this.dataCount = count;
+        this.dataCountInc = count;
       }
     );
     this.loadMoreSubscription = this.storeService.sourses.loadMore.subscribe(
       (): void => {
-        this.dataCount += this.dataCount;
+        this.dataCount += this.dataCountInc;
         this.getCoursesByParams();
       }
     );

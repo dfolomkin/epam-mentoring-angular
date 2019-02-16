@@ -6,7 +6,7 @@
   <div class="course-card__data">
     <div class="course-card__title">
       <h3>
-        {{ course.title | uppercase }} {{ isNewCtrl }}
+        {{ course.title | uppercase | slice: 0:30 }} {{ isNewCtrl }}
         <span *ngIf="course.rating === 5" class="course-card__rating-icon"
           ><i class="material-icons">star</i>
         </span>
