@@ -14,7 +14,9 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSearchClick() {
-    this.storeService.set('searchQuery', this.searchQuery);
+  onInputKeyUp(event: KeyboardEvent): void {
+    if (!(this.searchQuery.length % 3)) {
+      this.storeService.set('searchQuery', event);
+    }
   }
 }

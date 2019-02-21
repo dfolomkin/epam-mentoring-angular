@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { map, debounceTime } from 'rxjs/operators';
 
 import { CoursesService } from 'src/app/commons/services/courses.service';
 import { StoreService } from 'src/app/commons/services/store.service';
@@ -41,24 +42,31 @@ export class CoursesListComponent implements OnInit, OnDestroy {
     this.dataCount = DATA_COUNT_OPTIONS[0];
     this.dataCountInc = DATA_COUNT_OPTIONS[0];
 
-    this.filterServiceSubscription = this.storeService.sourses.filterQuery.subscribe(
+    this.filterServiceSubscription = this.storeService.sources.filterQuery.subscribe(
       (query: string): void => {
         this.filterQuery = query;
       }
     );
-    this.searchServiceSubscription = this.storeService.sourses.searchQuery.subscribe(
-      (query: string): void => {
-        this.searchQuery = query;
-        this.getCoursesByParams();
-      }
-    );
-    this.dataCountSubscription = this.storeService.sourses.dataCount.subscribe(
+    this.searchServiceSubscription = this.storeService.sources.searchQuery
+      .pipe(
+        map(event => (event.target as HTMLInputElement).value),
+        debounceTime(1000)
+      )
+      .subscribe(
+        (query: string): void => {
+          console.log(query);
+          this.searchQuery = query;
+          this.getCoursesByParams();
+        }
+      );
+    this.dataCountSubscription = this.storeService.sources.dataCount.subscribe(
       (count: number): void => {
         this.dataCount = count;
         this.dataCountInc = count;
+        this.getCoursesByParams();
       }
     );
-    this.loadMoreSubscription = this.storeService.sourses.loadMore.subscribe(
+    this.loadMoreSubscription = this.storeService.sources.loadMore.subscribe(
       (): void => {
         this.dataCount += this.dataCountInc;
         this.getCoursesByParams();

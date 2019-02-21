@@ -4,12 +4,6 @@
     type="text"
     class="validate"
     [(ngModel)]="searchQuery"
+    (keyup)="onInputKeyUp($event)"
   />
-  <button
-    type="button"
-    class="btn waves-effect waves-light"
-    (click)="onSearchClick()"
-  >
-    Search <i class="material-icons left">search</i>
-  </button>
 </div>

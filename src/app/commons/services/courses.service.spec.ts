@@ -36,7 +36,7 @@ describe('CoursesService', () => {
   });
 
   describe('#createCourse()', () => {
-    it('should add new course to the sourse', () => {
+    it('should add new course to the source', () => {
       const newCourse = { title: 'NewCourse4' } as ICourse;
 
       expect(service.getCourses().length).toBe(3);
@@ -49,7 +49,7 @@ describe('CoursesService', () => {
   });
 
   describe('#updateCourse()', () => {
-    it('should update pointed course in the sourse', () => {
+    it('should update pointed course in the source', () => {
       const newCourseData = { title: 'NewCourse3' } as ICourse;
 
       expect(service.getCourseById(3)).toEqual(coursesMock[2]);
@@ -65,7 +65,7 @@ describe('CoursesService', () => {
   });
 
   describe('#deleteCourse()', () => {
-    it('should delete pointed course in the sourse', () => {
+    it('should delete pointed course in the source', () => {
       expect(service.getCourses().length).toBe(3);
 
       service.deleteCourse(3);
@@ -80,7 +80,7 @@ describe('CoursesService', () => {
       expect(getNewId(service.getCourses())).toBe(4);
     });
 
-    it('should generate newId = 1 if the sourse is empty', () => {
+    it('should generate newId = 1 if the source is empty', () => {
       service.courses = [] as ICourse[];
 
       expect(getNewId(service.getCourses())).toBe(1);
