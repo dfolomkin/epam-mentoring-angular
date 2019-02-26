@@ -18,6 +18,8 @@ test storeService(filterService)
 !!! refresh user name after login
 !!! http<any | void | ???>
 
+catchError return type
+
 # QUESTIONS
 
 how to override pipes providers? w/o mocking full pipe?

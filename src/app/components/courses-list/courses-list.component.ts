@@ -54,7 +54,6 @@ export class CoursesListComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         (query: string): void => {
-          console.log(query);
           this.searchQuery = query;
           this.getCoursesByParams();
         }
