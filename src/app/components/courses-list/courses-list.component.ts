@@ -76,13 +76,17 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.filterServiceSubscription.unsubscribe();
-    // this.searchServiceSubscription.unsubscribe();
-    // this.dataCountSubscription.unsubscribe();
-    // this.loadMoreSubscription.unsubscribe();
-    // this.getCoursesSubscription.unsubscribe();
-    // this.getCoursesByParamsSubscription.unsubscribe();
-    // this.deleteCourseSubscription.unsubscribe();
+    this.filterServiceSubscription.unsubscribe();
+    this.searchServiceSubscription.unsubscribe();
+    this.dataCountSubscription.unsubscribe();
+    this.loadMoreSubscription.unsubscribe();
+    this.getCoursesSubscription.unsubscribe();
+    if (this.getCoursesByParamsSubscription) {
+      this.getCoursesByParamsSubscription.unsubscribe();
+    }
+    if (this.deleteCourseSubscription) {
+      this.deleteCourseSubscription.unsubscribe();
+    }
   }
 
   onChildDelete(id: number) {

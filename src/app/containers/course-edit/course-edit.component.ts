@@ -43,9 +43,15 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.createCourseSubscription.unsubscribe();
-    // this.updateCourseSubscription.unsubscribe();
-    // this.getCourseByIdSubscription.unsubscribe();
+    if (this.createCourseSubscription) {
+      this.createCourseSubscription.unsubscribe();
+    }
+    if (this.updateCourseSubscription) {
+      this.updateCourseSubscription.unsubscribe();
+    }
+    if (this.getCourseByIdSubscription) {
+      this.getCourseByIdSubscription.unsubscribe();
+    }
   }
 
   onSaveClick() {

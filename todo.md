@@ -14,7 +14,6 @@ http error handling => no data
 test coursesService
 test storeService(filterService)
 
-!!! //unsubscribe
 !!! refresh user name after login
 !!! http<any | void | ???>
 
