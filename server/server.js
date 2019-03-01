@@ -49,7 +49,11 @@ server.post('/api/auth', (req, res) => {
 
     db.authData[index].token = token;
     fs.writeFileSync('./db.json', JSON.stringify(db), 'utf8');
-    res.send({ token });
+    res.send({
+      login: req.body.login,
+      password: req.body.password,
+      token
+    });
   } else {
     res.status(401).send('Authorization has been failed!');
   }
@@ -66,13 +70,13 @@ server.delete('/api/auth', (req, res) => {
   if (index !== -1) {
     delete db.authData[index].token;
     fs.writeFileSync('./db.json', JSON.stringify(db), 'utf8');
-    res.status(200);
+    res.status(200).send();
   } else {
     res.status(401);
   }
 });
 
-// getUserInfo and isAuthed
+// getCurrentAuthPair
 server.get('/api/auth', (req, res) => {
   const authData = JSON.parse(fs.readFileSync('./db.json', 'utf8')).authData;
   const item = req.headers.token
@@ -80,7 +84,7 @@ server.get('/api/auth', (req, res) => {
     : undefined;
 
   if (item) {
-    res.send({ login: item.login, password: item.password });
+    res.send({ login: item.login, password: item.password, token: item.token });
   } else {
     res.status(401);
   }

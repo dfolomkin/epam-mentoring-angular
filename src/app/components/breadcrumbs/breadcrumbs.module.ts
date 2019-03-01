@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
 
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { AuthService } from 'src/app/commons/services/auth.service';
+import { AuthService } from 'src/app/components/auth/services/auth.service';
 
 @NgModule({
   declarations: [BreadcrumbsComponent],

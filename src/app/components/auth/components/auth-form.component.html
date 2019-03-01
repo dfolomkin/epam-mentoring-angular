@@ -1,0 +1,26 @@
+<form class="auth-form">
+  <input
+    placeholder="Login"
+    type="text"
+    class="validate"
+    [(ngModel)]="authPair.login"
+    name="login"
+    tabindex="1"
+  />
+  <input
+    placeholder="Password"
+    type="password"
+    class="validate"
+    [(ngModel)]="authPair.password"
+    name="password"
+    tabindex="1"
+  />
+  <button
+    type="button"
+    class="btn waves-effect waves-light"
+    (click)="onLoginClick()"
+    tabindex="1"
+  >
+    Login
+  </button>
+</form>

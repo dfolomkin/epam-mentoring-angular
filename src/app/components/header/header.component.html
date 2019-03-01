@@ -1,19 +1,19 @@
 <div class="header">
   <div class="header__logo"><app-logo brand="Courses"></app-logo></div>
   <div class="header__control-bar">
-    <span *ngIf="isAuthed" class="header__control">{{
-      authPair && authPair.login
+    <span *ngIf="(login$ | async) as login" class="header__control">{{
+      login
     }}</span>
     <button
       type="button"
-      *ngIf="isAuthed"
+      *ngIf="!!(login$ | async)"
       class="btn waves-effect waves-light"
       (click)="onLogoutClick()"
     >
       Logout <i class="material-icons left">exit_to_app</i>
     </button>
     <a
-      *ngIf="!isAuthed"
+      *ngIf="!(login$ | async)"
       routerLink="/auth"
       class="btn waves-effect waves-light"
       routerLinkActive="active"

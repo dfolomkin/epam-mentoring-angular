@@ -1,4 +1,4 @@
-# TODO
+# TODO for APP
 
 search component? - yes
 test filter, order in list or only pipes? - yes
@@ -14,12 +14,12 @@ http error handling => no data
 test coursesService
 test storeService(filterService)
 
-!!! refresh user name after login
+!!! refresh user name after login - with ngrx?
 !!! http<any | void | ???>
 
 catchError return type
 
-# QUESTIONS
+# QUESTIONS and KNOWLEDGE GAPS
 
 how to override pipes providers? w/o mocking full pipe?
 
@@ -42,3 +42,9 @@ async html w/o && - for {{}} maybe async pipe
 but what for [(ngModel)] ?
 
 reed more about cold/hot observables
+reed more about different maps
+
+what for exactly we need @Effect({ dispatch: false })?
+reed more about ngrx selectors?
+
+select is viable only if we need more complex selection logic, isn't it?

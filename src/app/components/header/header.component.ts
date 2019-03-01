@@ -1,38 +1,25 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
-import { AuthService, IAuthPair } from 'src/app/commons/services/auth.service';
-import { ROUTES_MAP } from 'src/app/commons/constants';
+import { IAppState, getAuthLogin } from 'src/app/app.state';
+import { Logout } from 'src/app/components/auth/actions/auth.action';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.less']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-  authPair: IAuthPair;
-  isAuthed: boolean;
-  getUserInfoSubscription: Subscription;
-  isAuthedSubscription: Subscription;
+export class HeaderComponent implements OnInit {
+  login$: Observable<string>;
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(private store$: Store<IAppState>) {}
 
   ngOnInit() {
-    this.authService.getUserInfo().subscribe((pair: IAuthPair) => {
-      this.authPair = pair;
-    });
-    this.authService.isAuthed().subscribe((res: boolean) => {
-      this.isAuthed = res;
-    });
-  }
-  ngOnDestroy() {
-    this.getUserInfoSubscription.unsubscribe();
-    this.isAuthedSubscription.unsubscribe();
+    this.login$ = this.store$.pipe(select(getAuthLogin));
   }
 
   onLogoutClick() {
-    this.authService.logout();
-    this.router.navigateByUrl('/' + ROUTES_MAP.auth);
+    this.store$.dispatch(new Logout());
   }
 }

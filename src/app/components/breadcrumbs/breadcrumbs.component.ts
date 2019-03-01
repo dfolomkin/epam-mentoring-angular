@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 import { tail, capitalize } from 'lodash';
 
-import { AuthService } from 'src/app/commons/services/auth.service';
+import { AuthService } from 'src/app/components/auth/services/auth.service';
 import { ROUTES_MAP } from 'src/app/commons/constants';
 import { Subscription } from 'rxjs';
 

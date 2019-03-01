@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BreadcrumbsComponent } from './breadcrumbs.component';
 
-import { AuthService } from 'src/app/commons/services/auth.service';
+import { AuthService } from 'src/app/components/auth/services/auth.service';
 
 describe('BreadcrumbsComponent', () => {
   let component: BreadcrumbsComponent;
