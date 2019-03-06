@@ -6,8 +6,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { CourseCardComponent } from './course-card.component';
 
 import { CourseCardModule } from './course-card.module';
-import { CoursesService } from 'src/app/commons/services/courses.service';
-import { ICourse } from 'src/app/commons/interfaces/course.interface';
+import { CoursesService } from 'src/app/components/courses/services/courses.service';
+import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 
 describe('CourseCardComponent-Test-Host', () => {

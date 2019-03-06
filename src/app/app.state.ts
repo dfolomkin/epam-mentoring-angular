@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
 import { IAuthPair } from 'src/app/components/auth/interfaces/auth.interface';
-import { ICourse } from 'src/app/commons/interfaces/course.interface';
+import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
 
 export interface IAppState {
   authPair: IAuthPair;

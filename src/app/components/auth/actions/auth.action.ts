@@ -6,7 +6,7 @@ import { IAuthPair, IResWithToken } from '../interfaces/auth.interface';
 export enum AuthActionTypes {
   Login = '[Auth] Login',
   LoginSuccess = '[Auth] Login Success',
-  LoginFailure = '[Auth] Login Failure',
+  AuthActionFailure = '[Auth] Auth Action Failure',
   Logout = '[Auth] Logout',
   GetCurrentAuthPair = '[Auth] Get Current Auth Pair'
 }
@@ -23,8 +23,8 @@ export class LoginSuccess implements Action {
   constructor(public payload: IResWithToken) {}
 }
 
-export class LoginFailure implements Action {
-  readonly type = AuthActionTypes.LoginFailure;
+export class AuthActionFailure implements Action {
+  readonly type = AuthActionTypes.AuthActionFailure;
 
   constructor(public payload: HttpErrorResponse) {}
 }
@@ -44,6 +44,6 @@ export class Logout implements Action {
 export type AuthActionUnion =
   | Login
   | LoginSuccess
-  | LoginFailure
+  | AuthActionFailure
   | GetCurrentAuthPair
   | Logout;

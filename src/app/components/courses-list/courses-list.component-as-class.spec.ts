@@ -2,9 +2,9 @@ import { remove } from 'lodash';
 
 import { CoursesListComponent } from './courses-list.component';
 
-import { CoursesService } from 'src/app/commons/services/courses.service';
+import { CoursesService } from 'src/app/components/courses/services/courses.service';
 import { SearchService } from 'src/app/commons/services/search.service';
-import { ICourse } from 'src/app/commons/interfaces/course.interface';
+import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
 
 describe('CoursesListComponent-As-Class', () => {
   let component: CoursesListComponent;

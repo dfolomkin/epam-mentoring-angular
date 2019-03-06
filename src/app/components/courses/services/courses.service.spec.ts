@@ -1,6 +1,6 @@
 import { CoursesService, getNewId } from './courses.service';
 
-import { ICourse } from 'src/app/commons/interfaces/course.interface';
+import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
 
 describe('CoursesService', () => {
   let service: CoursesService;

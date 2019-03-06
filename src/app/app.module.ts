@@ -21,6 +21,8 @@ import { AuthInterceptor } from './components/auth/auth.interceptor';
 
 import { authReducer } from './components/auth/reducers/auth.reducer';
 import { AuthEffects } from './components/auth/effects/auth.effect';
+import { coursesReducer } from './components/courses/reducers/courses.reducer';
+import { CoursesEffects } from './components/courses/effects/courses.effect';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,8 +30,8 @@ import { AuthEffects } from './components/auth/effects/auth.effect';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ authPair: authReducer }),
-    EffectsModule.forRoot([AuthEffects]),
+    StoreModule.forRoot({ authPair: authReducer, courses: coursesReducer }),
+    EffectsModule.forRoot([AuthEffects, CoursesEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),

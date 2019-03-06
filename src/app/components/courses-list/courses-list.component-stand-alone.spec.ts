@@ -6,9 +6,9 @@ import { remove } from 'lodash';
 import { CoursesListComponent } from './courses-list.component';
 
 import { CourseCardModule } from 'src/app/components/course-card/course-card.module';
-import { CoursesService } from 'src/app/commons/services/courses.service';
+import { CoursesService } from 'src/app/components/courses/services/courses.service';
 import { SearchService } from 'src/app/commons/services/search.service';
-import { ICourse } from 'src/app/commons/interfaces/course.interface';
+import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
 import { NO_DATA_PLACEHOLDER } from './courses-list.component';
 
 describe('CoursesListComponent-Stand-Alone', () => {

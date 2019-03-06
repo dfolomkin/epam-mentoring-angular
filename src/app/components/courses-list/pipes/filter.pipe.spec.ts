@@ -2,7 +2,7 @@ import { PipeTransform } from '@angular/core';
 
 import { FilterPipe } from './filter.pipe';
 
-import { ICourse } from 'src/app/commons/interfaces/course.interface';
+import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
 
 describe('FilterPipe', () => {
   let pipe: PipeTransform;

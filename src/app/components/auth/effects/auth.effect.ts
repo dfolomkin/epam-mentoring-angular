@@ -8,10 +8,10 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { IAuthPair, IResWithToken } from '../interfaces/auth.interface';
 import { AuthService } from '../services/auth.service';
 import {
+  AuthActionTypes,
   Login,
   LoginSuccess,
-  LoginFailure,
-  AuthActionTypes
+  AuthActionFailure
 } from '../actions/auth.action';
 
 import { ROUTES_MAP } from 'src/app/commons/constants';
@@ -25,7 +25,7 @@ export class AuthEffects {
     exhaustMap((authPair: IAuthPair) =>
       this.authService.login(authPair).pipe(
         map((resWithToken: IResWithToken) => new LoginSuccess(resWithToken)),
-        catchError((err: HttpErrorResponse) => of(new LoginFailure(err)))
+        catchError((err: HttpErrorResponse) => of(new AuthActionFailure(err)))
       )
     )
   );
@@ -41,9 +41,9 @@ export class AuthEffects {
   );
 
   @Effect({ dispatch: false })
-  loginFailure$ = this.actions$.pipe(
-    ofType(AuthActionTypes.LoginFailure),
-    map((action: LoginFailure) => console.error(action.payload.error)),
+  authActionFailure$ = this.actions$.pipe(
+    ofType(AuthActionTypes.AuthActionFailure),
+    map((action: AuthActionFailure) => console.error(action.payload.error)),
     tap(() => this.router.navigate([`/${ROUTES_MAP.auth}`]))
   );
 
@@ -53,7 +53,7 @@ export class AuthEffects {
     exhaustMap(() =>
       this.authService.getCurrentAuthPair().pipe(
         map((resWithToken: IResWithToken) => new LoginSuccess(resWithToken)),
-        catchError((err: HttpErrorResponse) => of(new LoginFailure(err)))
+        catchError((err: HttpErrorResponse) => of(new AuthActionFailure(err)))
       )
     )
   );
@@ -66,7 +66,7 @@ export class AuthEffects {
         map(() => {
           localStorage.removeItem('token');
         }),
-        catchError((err: HttpErrorResponse) => of(console.error(err.error)))
+        catchError((err: HttpErrorResponse) => of(new AuthActionFailure(err)))
       )
     ),
     tap(() => this.router.navigate([`/${ROUTES_MAP.auth}`]))

@@ -6,7 +6,7 @@ import { CourseEditComponent } from './course-edit.component';
 
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { PipesModule } from 'src/app/commons/pipes/pipes.module';
-import { CoursesService } from 'src/app/commons/services/courses.service';
+import { CoursesService } from 'src/app/components/courses/services/courses.service';
 
 @NgModule({
   declarations: [CourseEditComponent],

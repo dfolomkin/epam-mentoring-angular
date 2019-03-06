@@ -1,10 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
 
-import { CoursesService } from 'src/app/commons/services/courses.service';
+import { IAppState } from 'src/app/app.state';
+import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
+import {
+  GetCourses,
+  DeleteCourse
+} from 'src/app/components/courses/actions/courses.action';
+import { CoursesService } from 'src/app/components/courses/services/courses.service';
 import { StoreService } from 'src/app/commons/services/store.service';
-import { ICourse } from 'src/app/commons/interfaces/course.interface';
 import {
   NO_DATA_PLACEHOLDER,
   DATA_COUNT_OPTIONS
@@ -16,7 +22,8 @@ import {
   styleUrls: ['./courses-list.component.less']
 })
 export class CoursesListComponent implements OnInit, OnDestroy {
-  courses: ICourse[];
+  coursesPrev: ICourse[];
+  courses$: Observable<ICourse[]>;
   filterQuery: string;
   searchQuery: string;
   dataCount: number;
@@ -35,7 +42,8 @@ export class CoursesListComponent implements OnInit, OnDestroy {
 
   constructor(
     private coursesService: CoursesService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private store$: Store<IAppState>
   ) {}
 
   ngOnInit() {
@@ -72,7 +80,9 @@ export class CoursesListComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.getCourses();
+    this.courses$ = this.store$.pipe(select('courses'));
+    this.store$.dispatch(new GetCourses());
+    // this.getCourses();
   }
 
   ngOnDestroy() {
@@ -80,7 +90,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
     this.searchServiceSubscription.unsubscribe();
     this.dataCountSubscription.unsubscribe();
     this.loadMoreSubscription.unsubscribe();
-    this.getCoursesSubscription.unsubscribe();
+    // this.getCoursesSubscription.unsubscribe();
     if (this.getCoursesByParamsSubscription) {
       this.getCoursesByParamsSubscription.unsubscribe();
     }
@@ -91,18 +101,19 @@ export class CoursesListComponent implements OnInit, OnDestroy {
 
   onChildDelete(id: number) {
     if (confirm(`Do you really want to delete this course with id = ${id}?`)) {
-      this.deleteCourseSubscription = this.coursesService
-        .deleteCourse(id)
-        .subscribe(() => {
-          console.log(`Course with id = ${id} has been deleted.`);
-        });
+      // this.deleteCourseSubscription = this.coursesService
+      //   .deleteCourse(id)
+      //   .subscribe(() => {
+      //     console.log(`Course with id = ${id} has been deleted.`);
+      //   });
+      this.store$.dispatch(new DeleteCourse(id));
     }
   }
 
   getCourses() {
     this.getCoursesSubscription = this.coursesService.getCourses().subscribe(
       (data: ICourse[]): void => {
-        this.courses = data;
+        this.coursesPrev = data;
       }
     );
   }
@@ -112,7 +123,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
       .getCoursesByParams(this.searchQuery, 0, this.dataCount)
       .subscribe(
         (data: ICourse[]): void => {
-          this.courses = data;
+          this.coursesPrev = data;
         }
       );
   }

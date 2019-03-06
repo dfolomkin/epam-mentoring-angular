@@ -1,6 +1,6 @@
 import { CourseCardComponent } from './course-card.component';
 
-import { ICourse } from 'src/app/commons/interfaces/course.interface';
+import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
 
 describe('CourseCardComponent-As-Class', () => {
   let component: CourseCardComponent;

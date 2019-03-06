@@ -4,9 +4,9 @@ import { Observable, Subscription } from 'rxjs';
 import { retry, catchError, mergeMap, finalize } from 'rxjs/operators';
 import { max } from 'lodash';
 
+import { ICourse } from '../interfaces/courses.interface';
 import { LoaderService } from 'src/app/commons/services/loader.service';
 import { BACK_URL, ROUTES_MAP } from 'src/app/commons/constants';
-import { ICourse } from 'src/app/commons/interfaces/course.interface';
 
 export const getNewId = (courses: ICourse[]): number => {
   const ids = courses && courses.map(item => item.id);
@@ -22,6 +22,7 @@ export class CoursesService {
 
   getCourses(): Observable<ICourse[]> {
     this.loaderService.showLoader();
+
     return this.http.get<ICourse[]>(`${BACK_URL}/${ROUTES_MAP.courses}`).pipe(
       retry(3),
       catchError((err: HttpErrorResponse) => {
@@ -40,6 +41,7 @@ export class CoursesService {
     count: number
   ): Observable<ICourse[]> {
     this.loaderService.showLoader();
+
     return this.http
       .get<ICourse[]>(
         `${BACK_URL}/${ROUTES_MAP.courses}?${
@@ -60,6 +62,7 @@ export class CoursesService {
 
   getCourseById(id: number): Observable<ICourse | {}> {
     this.loaderService.showLoader();
+
     return this.http
       .get<ICourse | {}>(`${BACK_URL}/${ROUTES_MAP.courses}/${id}`)
       .pipe(

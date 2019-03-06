@@ -17,6 +17,8 @@ test storeService(filterService)
 !!! refresh user name after login - with ngrx?
 !!! http<any | void | ???>
 
+do unsubscribe way in courses-list
+
 catchError return type
 
 # QUESTIONS and KNOWLEDGE GAPS
@@ -48,3 +50,5 @@ what for exactly we need @Effect({ dispatch: false })?
 reed more about ngrx selectors?
 
 select is viable only if we need more complex selection logic, isn't it?
+
+how to organize events through app without ngrx, emit/broadcast?

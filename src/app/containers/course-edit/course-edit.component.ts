@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { CoursesService } from 'src/app/commons/services/courses.service';
-import { ICourse } from 'src/app/commons/interfaces/course.interface';
+import { CoursesService } from 'src/app/components/courses/services/courses.service';
+import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
 import { ROUTES_MAP } from 'src/app/commons/constants';
 
 @Component({
