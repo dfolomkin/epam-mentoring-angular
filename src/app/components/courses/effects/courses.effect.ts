@@ -12,7 +12,9 @@ import {
   GetCourses,
   GetCoursesSuccess,
   CoursesActionFailure,
-  DeleteCourse
+  DeleteCourse,
+  CreateCourse,
+  UpdateCourse
 } from '../actions/courses.action';
 
 import { ROUTES_MAP } from 'src/app/commons/constants';
@@ -35,7 +37,7 @@ export class CoursesEffects {
   @Effect()
   deleteCourse$ = this.actions$.pipe(
     ofType(CoursesActionTypes.DeleteCourse),
-    map((action: DeleteCourse) => action.payload),
+    map((action: DeleteCourse): number => action.payload),
     exhaustMap((id: number) =>
       this.coursesService.deleteCourse(id).pipe(
         tap(() => console.log(`Course with id = ${id} has been deleted.`)),
@@ -47,15 +49,34 @@ export class CoursesEffects {
     )
   );
 
-  // @Effect({ dispatch: false })
-  // loginSuccess$ = this.actions$.pipe(
-  //   ofType(AuthActionTypes.LoginSuccess),
-  //   map((action: LoginSuccess) => action.payload),
-  //   tap((resWithToken: IResWithToken) => {
-  //     localStorage.setItem('token', resWithToken.token);
-  //   }),
-  //   tap(() => this.router.navigate([`/${ROUTES_MAP.courses}`]))
-  // );
+  @Effect({ dispatch: false })
+  createCourse$ = this.actions$.pipe(
+    ofType(CoursesActionTypes.CreateCourse),
+    map((action: CreateCourse): Partial<ICourse> => action.payload),
+    exhaustMap((course: Partial<ICourse>) =>
+      this.coursesService.createCourse(course).pipe(
+        tap(() => this.router.navigate([`/${ROUTES_MAP.courses}`])),
+        catchError((err: HttpErrorResponse) =>
+          of(new CoursesActionFailure(err))
+        )
+      )
+    )
+  );
+
+  // it's actualy the same as create
+  @Effect({ dispatch: false })
+  updateCourse$ = this.actions$.pipe(
+    ofType(CoursesActionTypes.UpdateCourse),
+    map((action: UpdateCourse): Partial<ICourse> => action.payload),
+    exhaustMap((course: Partial<ICourse>) =>
+      this.coursesService.updateCourse(course).pipe(
+        tap(() => this.router.navigate([`/${ROUTES_MAP.courses}`])),
+        catchError((err: HttpErrorResponse) =>
+          of(new CoursesActionFailure(err))
+        )
+      )
+    )
+  );
 
   constructor(
     private actions$: Actions,

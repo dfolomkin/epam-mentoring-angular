@@ -21,7 +21,7 @@ export class AuthEffects {
   @Effect()
   login$ = this.actions$.pipe(
     ofType(AuthActionTypes.Login),
-    map((action: Login) => action.payload),
+    map((action: Login): IAuthPair => action.payload),
     exhaustMap((authPair: IAuthPair) =>
       this.authService.login(authPair).pipe(
         map((resWithToken: IResWithToken) => new LoginSuccess(resWithToken)),
@@ -33,7 +33,7 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   loginSuccess$ = this.actions$.pipe(
     ofType(AuthActionTypes.LoginSuccess),
-    map((action: LoginSuccess) => action.payload),
+    map((action: LoginSuccess): IResWithToken => action.payload),
     tap((resWithToken: IResWithToken) => {
       localStorage.setItem('token', resWithToken.token);
     }),
@@ -69,6 +69,7 @@ export class AuthEffects {
         catchError((err: HttpErrorResponse) => of(new AuthActionFailure(err)))
       )
     ),
+    // TODO: relocate to auth map after remove token
     tap(() => this.router.navigate([`/${ROUTES_MAP.auth}`]))
   );
 

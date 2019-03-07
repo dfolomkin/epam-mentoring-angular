@@ -96,7 +96,7 @@ export class CoursesService {
     return postObservable;
   }
 
-  updateCourse(course: ICourse): Observable<any> {
+  updateCourse(course: Partial<ICourse>): Observable<any> {
     this.loaderService.showLoader();
 
     return this.http

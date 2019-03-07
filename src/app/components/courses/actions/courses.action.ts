@@ -7,7 +7,9 @@ export enum CoursesActionTypes {
   GetCourses = '[Courses] Get Courses',
   GetCoursesSuccess = '[Courses] Get Courses Success',
   CoursesActionFailure = '[Courses] Courses Action Failure',
-  DeleteCourse = '[Courses] Delete Course'
+  DeleteCourse = '[Courses] Delete Course',
+  CreateCourse = '[Courses] Create Course',
+  UpdateCourse = '[Courses] Update Course'
 }
 
 export class GetCourses implements Action {
@@ -34,8 +36,22 @@ export class DeleteCourse implements Action {
   constructor(public payload: number) {}
 }
 
+export class CreateCourse implements Action {
+  readonly type = CoursesActionTypes.CreateCourse;
+
+  constructor(public payload: Partial<ICourse>) {}
+}
+
+export class UpdateCourse implements Action {
+  readonly type = CoursesActionTypes.UpdateCourse;
+
+  constructor(public payload: Partial<ICourse>) {}
+}
+
 export type CoursesActionUnion =
   | GetCourses
   | GetCoursesSuccess
   | CoursesActionFailure
-  | DeleteCourse;
+  | DeleteCourse
+  | CreateCourse
+  | UpdateCourse;

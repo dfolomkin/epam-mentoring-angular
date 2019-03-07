@@ -1,9 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
-import { CoursesService } from 'src/app/components/courses/services/courses.service';
+import { IAppState } from 'src/app/app.state';
 import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
+import {
+  CreateCourse,
+  UpdateCourse
+} from 'src/app/components/courses/actions/courses.action';
+import { CoursesService } from 'src/app/components/courses/services/courses.service';
 import { ROUTES_MAP } from 'src/app/commons/constants';
 
 @Component({
@@ -21,7 +27,8 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   constructor(
     private coursesService: CoursesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store$: Store<IAppState>
   ) {}
 
   ngOnInit() {
@@ -56,11 +63,13 @@ export class CourseEditComponent implements OnInit, OnDestroy {
 
   onSaveClick() {
     if (this.isNew) {
-      this.createCourse(this.course);
+      // this.createCourse(this.course);
+      this.store$.dispatch(new CreateCourse(this.course));
     } else {
-      this.updateCourse(this.course as ICourse);
+      // this.updateCourse(this.course);
+      this.store$.dispatch(new UpdateCourse(this.course));
     }
-    this.router.navigateByUrl('/' + ROUTES_MAP.courses);
+    // this.router.navigateByUrl('/' + ROUTES_MAP.courses);
   }
 
   getCourseById(id: number) {
@@ -81,7 +90,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       });
   }
 
-  updateCourse(course: ICourse) {
+  updateCourse(course: Partial<ICourse>) {
     this.updateCourseSubscription = this.coursesService
       .updateCourse(course)
       .subscribe(() => {

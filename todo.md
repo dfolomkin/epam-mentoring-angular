@@ -47,6 +47,8 @@ reed more about cold/hot observables
 reed more about different maps
 
 what for exactly we need @Effect({ dispatch: false })?
+what if success doesn't dispatch action, but catchError does?
+
 reed more about ngrx selectors?
 
 select is viable only if we need more complex selection logic, isn't it?
