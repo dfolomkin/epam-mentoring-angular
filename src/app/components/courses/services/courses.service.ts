@@ -35,6 +35,10 @@ export class CoursesService {
     );
   }
 
+  getCoursesServerCount(): Observable<number> {
+    return this.http.get<number>(`${BACK_URL}/${ROUTES_MAP.courses}/count`);
+  }
+
   getCoursesByParams(
     query: string,
     start: number,
@@ -77,6 +81,18 @@ export class CoursesService {
       );
   }
 
+  deleteCourse(id: number): Observable<any> {
+    this.loaderService.showLoader();
+
+    return this.http
+      .delete<any>(`${BACK_URL}/${ROUTES_MAP.courses}/${id}`)
+      .pipe(
+        finalize(() => {
+          this.loaderService.hideLoader();
+        })
+      );
+  }
+
   createCourse(course: Partial<ICourse>): Observable<any> {
     const postObservable = this.getCourses().pipe(
       mergeMap((courses: ICourse[]) => {
@@ -101,18 +117,6 @@ export class CoursesService {
 
     return this.http
       .put<any>(`${BACK_URL}/${ROUTES_MAP.courses}/${course.id}`, course)
-      .pipe(
-        finalize(() => {
-          this.loaderService.hideLoader();
-        })
-      );
-  }
-
-  deleteCourse(id: number): Observable<any> {
-    this.loaderService.showLoader();
-
-    return this.http
-      .delete<any>(`${BACK_URL}/${ROUTES_MAP.courses}/${id}`)
       .pipe(
         finalize(() => {
           this.loaderService.hideLoader();

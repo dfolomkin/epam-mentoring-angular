@@ -1,6 +1,6 @@
-import { AuthActionUnion, AuthActionTypes } from '../actions/auth.action';
 import { initialAppState } from 'src/app/app.state';
 import { IAuthPair } from '../interfaces/auth.interface';
+import { AuthActionUnion, AuthActionTypes } from '../actions/auth.action';
 
 export const authReducer = (
   state = initialAppState.authPair,

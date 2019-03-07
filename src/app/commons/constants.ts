@@ -6,8 +6,6 @@ export const ROUTES_MAP = {
 
 export const NO_DATA_PLACEHOLDER = 'No data. Feel free to add new one.';
 
-export const DATA_COUNT_OPTIONS: number[] = [30, 60];
-
 const PORT = 3000;
 
 export const BACK_URL = `http://localhost:${PORT}/api`;

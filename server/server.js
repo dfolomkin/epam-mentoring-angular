@@ -33,6 +33,12 @@ server.get('/api/courses', (req, res) => {
   }
 });
 
+server.get('/api/courses/count', (req, res) => {
+  const courses = JSON.parse(fs.readFileSync('./db.json', 'utf8')).courses;
+
+  res.send({ count: courses.length });
+});
+
 // login
 server.post('/api/auth', (req, res) => {
   const getSequence = require('./utils.js').getSequence;
@@ -79,10 +85,9 @@ server.delete('/api/auth', (req, res) => {
 // getCurrentAuthPair
 server.get('/api/auth', (req, res) => {
   const authData = JSON.parse(fs.readFileSync('./db.json', 'utf8')).authData;
-  const item = req.headers.token
-    ? authData.find(item => item.token === req.headers.token)
-    : undefined;
-
+  const item =
+    req.headers.token &&
+    authData.find(item => item.token === req.headers.token);
   if (item) {
     res.send({ login: item.login, password: item.password, token: item.token });
   } else {

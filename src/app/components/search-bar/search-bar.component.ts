@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { StoreService } from 'src/app/commons/services/store.service';
+import { IAppState } from 'src/app/app.state';
+import { SetCoursesSearch } from 'src/app/components/courses-control/actions/courses-control.action';
 
 @Component({
   selector: 'app-search-bar',
@@ -10,13 +12,11 @@ import { StoreService } from 'src/app/commons/services/store.service';
 export class SearchBarComponent implements OnInit {
   searchQuery: string;
 
-  constructor(private storeService: StoreService) {}
+  constructor(private store$: Store<IAppState>) {}
 
   ngOnInit() {}
 
-  onInputKeyUp(event: KeyboardEvent): void {
-    if (!(this.searchQuery.length % 3)) {
-      this.storeService.set('searchQuery', event);
-    }
+  onInputKeyUp(): void {
+    this.store$.dispatch(new SetCoursesSearch(this.searchQuery));
   }
 }

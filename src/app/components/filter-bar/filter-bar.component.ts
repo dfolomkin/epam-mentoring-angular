@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { StoreService } from 'src/app/commons/services/store.service';
+import { IAppState } from 'src/app/app.state';
+import { SetCoursesFilter } from 'src/app/components/courses-control/actions/courses-control.action';
 
 @Component({
   selector: 'app-filter-bar',
@@ -10,11 +12,11 @@ import { StoreService } from 'src/app/commons/services/store.service';
 export class FilterBarComponent implements OnInit {
   filterQuery: string;
 
-  constructor(private storeService: StoreService) {}
+  constructor(private store$: Store<IAppState>) {}
 
   ngOnInit() {}
 
-  onInputKeyUp() {
-    this.storeService.set('filterQuery', this.filterQuery);
+  onInputKeyUp(): void {
+    this.store$.dispatch(new SetCoursesFilter(this.filterQuery));
   }
 }

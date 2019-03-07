@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
-import { StoreService } from 'src/app/commons/services/store.service';
-
-import { DATA_COUNT_OPTIONS } from 'src/app/commons/constants';
+import { IAppState } from 'src/app/app.state';
+import {
+  SetCoursesChunkSize,
+  SetCoursesCount
+} from 'src/app/components/courses-control/actions/courses-control.action';
+import {
+  DataChunkSize,
+  dataChunkSizes
+} from 'src/app/components/courses-control/interfaces/courses-control.interface';
 
 @Component({
   selector: 'app-data-count-switch',
@@ -10,17 +17,18 @@ import { DATA_COUNT_OPTIONS } from 'src/app/commons/constants';
   styleUrls: ['./data-count-switch.component.less']
 })
 export class DataCountSwitchComponent implements OnInit {
-  dataCountOptions: number[];
-  dataCount: number;
+  dataCount: DataChunkSize;
+  dataCountOptions: DataChunkSize[];
 
-  constructor(private storeService: StoreService) {}
+  constructor(private store$: Store<IAppState>) {}
 
   ngOnInit() {
-    this.dataCountOptions = DATA_COUNT_OPTIONS;
-    this.dataCount = DATA_COUNT_OPTIONS[0];
+    this.dataCount = DataChunkSize.chunk30;
+    this.dataCountOptions = dataChunkSizes;
   }
 
-  onChange() {
-    this.storeService.set('dataCount', this.dataCount);
+  onChange(): void {
+    this.store$.dispatch(new SetCoursesChunkSize(this.dataCount));
+    this.store$.dispatch(new SetCoursesCount(this.dataCount));
   }
 }

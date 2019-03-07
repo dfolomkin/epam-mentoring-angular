@@ -4,13 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { FilterBarComponent } from './filter-bar.component';
 
-import { StoreService } from 'src/app/commons/services/store.service';
-
 @NgModule({
   declarations: [FilterBarComponent],
   imports: [CommonModule, FormsModule],
   exports: [FilterBarComponent],
-  bootstrap: [FilterBarComponent],
-  providers: [StoreService]
+  bootstrap: [FilterBarComponent]
 })
 export class FilterBarModule {}

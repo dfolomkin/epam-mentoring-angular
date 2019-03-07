@@ -1,17 +1,20 @@
+import { initialAppState } from 'src/app/app.state';
+import { ICoursesState } from '../interfaces/courses.interface';
 import {
   CoursesActionUnion,
   CoursesActionTypes
 } from '../actions/courses.action';
-import { initialAppState } from 'src/app/app.state';
-import { ICourse } from '../interfaces/courses.interface';
 
 export const coursesReducer = (
   state = initialAppState.courses,
   action: CoursesActionUnion
-): ICourse[] => {
+): ICoursesState => {
   switch (action.type) {
     case CoursesActionTypes.GetCoursesSuccess: {
-      return action.payload;
+      return { ...state, list: action.payload };
+    }
+    case CoursesActionTypes.SetCoursesServerCount: {
+      return { ...state, serverCount: action.payload };
     }
 
     default:

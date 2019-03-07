@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { IAppState } from 'src/app/app.state';
 import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
@@ -20,13 +20,11 @@ import { ROUTES_MAP } from 'src/app/commons/constants';
 export class CourseEditComponent implements OnInit, OnDestroy {
   course: Partial<ICourse>;
   isNew: boolean;
-  createCourseSubscription: Subscription;
-  updateCourseSubscription: Subscription;
+
   getCourseByIdSubscription: Subscription;
 
   constructor(
     private coursesService: CoursesService,
-    private router: Router,
     private route: ActivatedRoute,
     private store$: Store<IAppState>
   ) {}
@@ -50,29 +48,20 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.createCourseSubscription) {
-      this.createCourseSubscription.unsubscribe();
-    }
-    if (this.updateCourseSubscription) {
-      this.updateCourseSubscription.unsubscribe();
-    }
     if (this.getCourseByIdSubscription) {
       this.getCourseByIdSubscription.unsubscribe();
     }
   }
 
-  onSaveClick() {
+  onSaveClick(): void {
     if (this.isNew) {
-      // this.createCourse(this.course);
       this.store$.dispatch(new CreateCourse(this.course));
     } else {
-      // this.updateCourse(this.course);
       this.store$.dispatch(new UpdateCourse(this.course));
     }
-    // this.router.navigateByUrl('/' + ROUTES_MAP.courses);
   }
 
-  getCourseById(id: number) {
+  getCourseById(id: number): void {
     this.getCourseByIdSubscription = this.coursesService
       .getCourseById(id)
       .subscribe(
@@ -80,21 +69,5 @@ export class CourseEditComponent implements OnInit, OnDestroy {
           this.course = data;
         }
       );
-  }
-
-  createCourse(course: Partial<ICourse>) {
-    this.createCourseSubscription = this.coursesService
-      .createCourse(course)
-      .subscribe(() => {
-        console.log('New course has been added.');
-      });
-  }
-
-  updateCourse(course: Partial<ICourse>) {
-    this.updateCourseSubscription = this.coursesService
-      .updateCourse(course)
-      .subscribe(() => {
-        console.log(`Course with id = ${this.course.id} has been updated.`);
-      });
   }
 }

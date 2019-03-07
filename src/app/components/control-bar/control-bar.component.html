@@ -10,6 +10,7 @@
         class="btn waves-effect waves-light"
         routerLink="/courses/new"
         routerLinkActive="active"
+        [attr.disabled]="(login$ | async) ? null : true"
       >
         Add course <i class="material-icons left">add</i>
       </a>

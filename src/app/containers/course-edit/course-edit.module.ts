@@ -5,12 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { CourseEditComponent } from './course-edit.component';
 
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { PipesModule } from 'src/app/commons/pipes/pipes.module';
+import { CustomPipesModule } from 'src/app/commons/pipes/custom-pipes.module';
 import { CoursesService } from 'src/app/components/courses/services/courses.service';
 
 @NgModule({
   declarations: [CourseEditComponent],
-  imports: [CommonModule, AppRoutingModule, FormsModule, PipesModule],
+  imports: [CommonModule, AppRoutingModule, FormsModule, CustomPipesModule],
   bootstrap: [CourseEditComponent],
   providers: [CoursesService]
 })

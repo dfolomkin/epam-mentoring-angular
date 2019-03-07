@@ -1,23 +1,23 @@
-import { createSelector } from '@ngrx/store';
-
 import { IAuthPair } from 'src/app/components/auth/interfaces/auth.interface';
-import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
+import { ICoursesState } from 'src/app/components/courses/interfaces/courses.interface';
+import {
+  ICoursesControls,
+  DataChunkSize
+} from 'src/app/components/courses-control/interfaces/courses-control.interface';
 
 export interface IAppState {
   authPair: IAuthPair;
-  courses: ICourse[];
+  courses: ICoursesState;
+  coursesControls: ICoursesControls;
 }
 
 export const initialAppState: IAppState = {
   authPair: {} as IAuthPair,
-  courses: []
+  courses: { list: [], serverCount: 0 },
+  coursesControls: {
+    filterQuery: '',
+    searchQuery: '',
+    dataChunkSize: DataChunkSize.chunk30,
+    dataCount: DataChunkSize.chunk30
+  }
 };
-
-const selectAuthPair = (state: IAppState) => state.authPair;
-
-export const getAuthLogin = createSelector(
-  selectAuthPair,
-  (authPairState: IAuthPair) => authPairState.login
-);
-
-export const selectCourses = (state: IAppState) => state.courses;

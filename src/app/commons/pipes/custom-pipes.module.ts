@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DurationPipe } from './duration.pipe';
+import { OrderByDatePipe } from './order-by-date.pipe';
 
 @NgModule({
-  declarations: [DurationPipe],
+  declarations: [DurationPipe, OrderByDatePipe],
   imports: [CommonModule],
-  exports: [DurationPipe]
+  exports: [DurationPipe, OrderByDatePipe]
 })
-export class PipesModule {}
+export class CustomPipesModule {}

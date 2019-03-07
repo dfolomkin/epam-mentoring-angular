@@ -19,7 +19,7 @@ export class AuthFormComponent implements OnInit {
     this.authPair = { login: '', password: '' };
   }
 
-  onLoginClick() {
+  onLoginClick(): void {
     this.store$.dispatch(new Login(this.authPair));
   }
 }

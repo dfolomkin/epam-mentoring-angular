@@ -23,6 +23,7 @@ import { authReducer } from './components/auth/reducers/auth.reducer';
 import { AuthEffects } from './components/auth/effects/auth.effect';
 import { coursesReducer } from './components/courses/reducers/courses.reducer';
 import { CoursesEffects } from './components/courses/effects/courses.effect';
+import { coursesControlReducer } from './components/courses-control/reducers/courses-control.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,11 @@ import { CoursesEffects } from './components/courses/effects/courses.effect';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ authPair: authReducer, courses: coursesReducer }),
+    StoreModule.forRoot({
+      authPair: authReducer,
+      courses: coursesReducer,
+      coursesControls: coursesControlReducer
+    }),
     EffectsModule.forRoot([AuthEffects, CoursesEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-import { IAppState, getAuthLogin } from 'src/app/app.state';
+import { IAppState } from 'src/app/app.state';
+import { getAuthLogin } from 'src/app/components/auth/selectors/auth.selector';
 import { Logout } from 'src/app/components/auth/actions/auth.action';
 
 @Component({
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
     this.login$ = this.store$.pipe(select(getAuthLogin));
   }
 
-  onLogoutClick() {
+  onLogoutClick(): void {
     this.store$.dispatch(new Logout());
   }
 }

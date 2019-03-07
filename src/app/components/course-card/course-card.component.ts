@@ -6,8 +6,12 @@ import {
   EventEmitter,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
+import { IAppState } from 'src/app/app.state';
 import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
+import { getAuthLogin } from 'src/app/components/auth/selectors/auth.selector';
 
 @Component({
   selector: 'app-course-card',
@@ -22,11 +26,16 @@ export class CourseCardComponent implements OnInit {
   @Output()
   clickEvent = new EventEmitter();
 
-  constructor() {}
+  // TODO: it can brake onPush
+  login$: Observable<string>;
 
-  ngOnInit() {}
+  constructor(private store$: Store<IAppState>) {}
 
-  onDeleteClick() {
+  ngOnInit() {
+    this.login$ = this.store$.pipe(select(getAuthLogin));
+  }
+
+  onDeleteClick(): void {
     this.clickEvent.emit(this.course.id);
   }
 }

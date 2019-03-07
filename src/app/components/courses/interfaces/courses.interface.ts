@@ -7,3 +7,14 @@ export interface ICourse {
   duration: number;
   rating: number;
 }
+
+export interface ICoursesState {
+  list: ICourse[];
+  serverCount: number;
+}
+
+export interface IGetCoursesParams {
+  searchQuery: string;
+  startFrom: number;
+  dataCount: number;
+}

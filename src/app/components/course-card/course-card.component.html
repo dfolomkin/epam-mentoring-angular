@@ -29,6 +29,7 @@
       class="btn waves-effect waves-light"
       routerLink="/courses/{{ course.id }}"
       routerLinkActive="active"
+      [attr.disabled]="(login$ | async) ? null : true"
     >
       Edit <i class="material-icons left">edit</i>
     </a>
@@ -36,6 +37,7 @@
       type="button"
       class="btn waves-effect waves-light js-delete"
       (click)="onDeleteClick()"
+      [attr.disabled]="(login$ | async) ? null : true"
     >
       Delete <i class="material-icons left">delete</i>
     </button>

@@ -5,11 +5,11 @@ import { CourseCardComponent } from './course-card.component';
 import { CourseCardBorderDirective } from './directives/course-card-border.directive';
 
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { PipesModule } from 'src/app/commons/pipes/pipes.module';
+import { CustomPipesModule } from 'src/app/commons/pipes/custom-pipes.module';
 
 @NgModule({
   declarations: [CourseCardComponent, CourseCardBorderDirective],
-  imports: [CommonModule, AppRoutingModule, PipesModule],
+  imports: [CommonModule, AppRoutingModule, CustomPipesModule],
   exports: [CourseCardComponent],
   bootstrap: [CourseCardComponent]
 })

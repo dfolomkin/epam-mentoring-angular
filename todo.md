@@ -14,12 +14,10 @@ http error handling => no data
 test coursesService
 test storeService(filterService)
 
-!!! refresh user name after login - with ngrx?
 !!! http<any | void | ???>
-
-do unsubscribe way in courses-list
-
 catchError return type
+
+json-server somehow reset token after create/update/delete
 
 # QUESTIONS and KNOWLEDGE GAPS
 
@@ -54,3 +52,5 @@ reed more about ngrx selectors?
 select is viable only if we need more complex selection logic, isn't it?
 
 how to organize events through app without ngrx, emit/broadcast?
+
+project structure for ngrx store/effects?

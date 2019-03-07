@@ -11,9 +11,9 @@ import {
   AuthActionTypes,
   Login,
   LoginSuccess,
+  LogoutSuccess,
   AuthActionFailure
 } from '../actions/auth.action';
-
 import { ROUTES_MAP } from 'src/app/commons/constants';
 
 @Injectable()
@@ -36,15 +36,37 @@ export class AuthEffects {
     map((action: LoginSuccess): IResWithToken => action.payload),
     tap((resWithToken: IResWithToken) => {
       localStorage.setItem('token', resWithToken.token);
-    }),
-    tap(() => this.router.navigate([`/${ROUTES_MAP.courses}`]))
+      this.router.navigate([`/${ROUTES_MAP.courses}`]);
+    })
+  );
+
+  @Effect()
+  logout$ = this.actions$.pipe(
+    ofType(AuthActionTypes.Logout),
+    exhaustMap(() =>
+      this.authService.logout().pipe(
+        map(() => new LogoutSuccess()),
+        catchError((err: HttpErrorResponse) => of(new AuthActionFailure(err)))
+      )
+    )
+  );
+
+  @Effect({ dispatch: false })
+  logoutSuccess$ = this.actions$.pipe(
+    ofType(AuthActionTypes.LogoutSuccess),
+    tap(() => {
+      localStorage.removeItem('token');
+      this.router.navigate([`/${ROUTES_MAP.auth}`]);
+    })
   );
 
   @Effect({ dispatch: false })
   authActionFailure$ = this.actions$.pipe(
     ofType(AuthActionTypes.AuthActionFailure),
     map((action: AuthActionFailure) => console.error(action.payload.error)),
-    tap(() => this.router.navigate([`/${ROUTES_MAP.auth}`]))
+    tap(() => {
+      this.router.navigate([`/${ROUTES_MAP.auth}`]);
+    })
   );
 
   @Effect()
@@ -56,21 +78,6 @@ export class AuthEffects {
         catchError((err: HttpErrorResponse) => of(new AuthActionFailure(err)))
       )
     )
-  );
-
-  @Effect({ dispatch: false })
-  logout$ = this.actions$.pipe(
-    ofType(AuthActionTypes.Logout),
-    exhaustMap(() =>
-      this.authService.logout().pipe(
-        map(() => {
-          localStorage.removeItem('token');
-        }),
-        catchError((err: HttpErrorResponse) => of(new AuthActionFailure(err)))
-      )
-    ),
-    // TODO: relocate to auth map after remove token
-    tap(() => this.router.navigate([`/${ROUTES_MAP.auth}`]))
   );
 
   constructor(
