@@ -1,5 +1,5 @@
 <div class="course-edit-wrapper">
-  <form class="course-edit-form">
+  <form class="course-edit-form" [formGroup]="courseForm">
     <div class="control-group">
       <label for="form_title">Title:</label>
       <input
@@ -7,8 +7,7 @@
         placeholder="Title"
         type="text"
         class="validate"
-        [(ngModel)]="course.title"
-        name="title"
+        formControlName="title"
       />
     </div>
     <div class="control-group">
@@ -19,8 +18,7 @@
         type="text"
         class="materialize-textarea"
         rows="3"
-        [(ngModel)]="course.description"
-        name="description"
+        formControlName="description"
       ></textarea>
     </div>
     <div class="control-group">
@@ -30,8 +28,7 @@
         placeholder="Date"
         type="date"
         class="validate"
-        [(ngModel)]="course.date"
-        name="date"
+        formControlName="date"
       />
     </div>
     <div class="control-group">
@@ -41,10 +38,9 @@
         placeholder="Duration"
         type="number"
         class="validate"
-        [(ngModel)]="course.duration"
-        name="duration"
+        formControlName="duration"
       />
-      {{ course && course.duration | duration }}
+      {{ courseForm.value.duration | duration }}
     </div>
     <div class="control-group">
       <label for="form_author">Author:</label>
@@ -53,8 +49,7 @@
         placeholder="Author"
         type="text"
         class="validate"
-        [(ngModel)]="course.author"
-        name="author"
+        formControlName="author"
       />
     </div>
 

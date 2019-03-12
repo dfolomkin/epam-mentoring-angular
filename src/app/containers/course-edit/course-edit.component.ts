@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -18,10 +19,18 @@ import { ROUTES_MAP } from 'src/app/commons/constants';
   styleUrls: ['./course-edit.component.less']
 })
 export class CourseEditComponent implements OnInit, OnDestroy {
-  course: Partial<ICourse>;
   isNew: boolean;
 
   getCourseByIdSubscription: Subscription;
+
+  courseForm = new FormGroup({
+    id: new FormControl(0),
+    title: new FormControl(''),
+    description: new FormControl(''),
+    author: new FormControl(''),
+    date: new FormControl(new Date()),
+    duration: new FormControl(0)
+  });
 
   constructor(
     private coursesService: CoursesService,
@@ -30,14 +39,6 @@ export class CourseEditComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.course = {
-      title: '',
-      description: '',
-      date: new Date(),
-      duration: 0,
-      author: ''
-    };
-
     const id = this.route.snapshot.paramMap.get('id');
 
     if (!isNaN(+id)) {
@@ -55,9 +56,9 @@ export class CourseEditComponent implements OnInit, OnDestroy {
 
   onSaveClick(): void {
     if (this.isNew) {
-      this.store$.dispatch(new CreateCourse(this.course));
+      this.store$.dispatch(new CreateCourse(this.courseForm.value));
     } else {
-      this.store$.dispatch(new UpdateCourse(this.course));
+      this.store$.dispatch(new UpdateCourse(this.courseForm.value));
     }
   }
 
@@ -66,7 +67,7 @@ export class CourseEditComponent implements OnInit, OnDestroy {
       .getCourseById(id)
       .subscribe(
         (data: ICourse): void => {
-          this.course = data;
+          this.courseForm.patchValue(data);
         }
       );
   }

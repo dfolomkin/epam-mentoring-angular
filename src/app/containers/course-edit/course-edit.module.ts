@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { CourseEditComponent } from './course-edit.component';
 
@@ -10,7 +10,12 @@ import { CoursesService } from 'src/app/components/courses/services/courses.serv
 
 @NgModule({
   declarations: [CourseEditComponent],
-  imports: [CommonModule, AppRoutingModule, FormsModule, CustomPipesModule],
+  imports: [
+    CommonModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    CustomPipesModule
+  ],
   bootstrap: [CourseEditComponent],
   providers: [CoursesService]
 })
