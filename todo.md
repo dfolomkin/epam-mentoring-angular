@@ -19,6 +19,9 @@ catchError return type
 
 json-server somehow reset token after create/update/delete
 
+remove filter
+remove sort pipe, implement server sort
+
 # QUESTIONS and KNOWLEDGE GAPS
 
 how to override pipes providers? w/o mocking full pipe?

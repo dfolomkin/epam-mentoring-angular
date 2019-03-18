@@ -1,0 +1,76 @@
+<form class="course-edit-form" [formGroup]="courseForm">
+  <div class="control-group">
+    <label for="form_title">Title:</label>
+    <input
+      id="form_title"
+      placeholder="Title"
+      type="text"
+      formControlName="title"
+    />
+  </div>
+  <div class="control-group">
+    <label for="form_description">Description:</label>
+    <textarea
+      id="form_description"
+      placeholder="Decription"
+      type="text"
+      class="materialize-textarea"
+      rows="3"
+      formControlName="description"
+    ></textarea>
+  </div>
+  <div class="control-group">
+    <span *ngIf="date.errors?.forbiddenDateFormat" class="validator-alert">
+      Format should be dd/mm/yyyy.
+    </span>
+    <label for="form_date">Date:</label>
+    <input
+      id="form_date"
+      placeholder="Date"
+      type="text"
+      formControlName="date"
+      [class.input-alert]="date.errors?.forbiddenDateFormat"
+    />
+  </div>
+  <div class="control-group">
+    <label for="form_duration">Duration:</label>
+    <span *ngIf="duration.errors?.NaN" class="validator-alert">
+      Only numbers are allowed.
+    </span>
+    <input
+      id="form_duration"
+      placeholder="Duration"
+      type="text"
+      formControlName="duration"
+      [class.input-alert]="duration.errors?.NaN"
+    />
+    {{ courseForm.value.duration | duration }}
+  </div>
+  <div class="control-group">
+    <label for="form_author">Author:</label>
+    <input
+      id="form_author"
+      placeholder="Author"
+      type="text"
+      formControlName="author"
+    />
+  </div>
+
+  <div class="control-group control-group-row">
+    <a
+      class="btn waves-effect waves-light"
+      routerLink="/courses"
+      routerLinkActive="active"
+    >
+      Cancel
+    </a>
+    <button
+      type="button"
+      class="btn waves-effect waves-light"
+      (click)="onSaveClick()"
+      [disabled]="date.errors || duration.errors"
+    >
+      Save
+    </button>
+  </div>
+</form>

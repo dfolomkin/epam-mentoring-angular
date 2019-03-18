@@ -8,7 +8,6 @@ import { AuthModule } from 'src/app/components/auth/auth.module';
 @NgModule({
   declarations: [AuthContainerComponent],
   imports: [CommonModule, AuthModule],
-  exports: [AuthContainerComponent],
   bootstrap: [AuthContainerComponent]
 })
 export class AuthContainerModule {}
