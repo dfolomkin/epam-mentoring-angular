@@ -14,6 +14,8 @@ import { CoursesService } from 'src/app/components/courses/services/courses.serv
 import { ROUTES_MAP } from 'src/app/commons/constants';
 import { isNumberValidator } from './validators/is-number.validator';
 import { hasCorrectDateFormat } from './validators/has-correct-date-format.validator';
+import { AuthorsService } from 'src/app/commons/services/authors.service';
+import { IAuthor } from 'src/app/commons/interfaces/author.interface';
 
 @Component({
   selector: 'app-course-edit-form',
@@ -22,8 +24,9 @@ import { hasCorrectDateFormat } from './validators/has-correct-date-format.valid
 })
 export class CourseEditFormComponent implements OnInit, OnDestroy {
   isNew: boolean;
+  authors: IAuthor[];
 
-  getCourseByIdSubscription: Subscription;
+  subscriptionsHeap: Subscription[];
 
   private nowDate = new Date().toLocaleDateString('ru-RU').replace(/\./g, '/');
 
@@ -52,6 +55,7 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private coursesService: CoursesService,
+    private authorsService: AuthorsService,
     private route: ActivatedRoute,
     private store$: Store<IAppState>
   ) {}
@@ -64,11 +68,19 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
     } else if (id === ROUTES_MAP.newId) {
       this.isNew = true;
     }
+
+    this.subscriptionsHeap.push(
+      this.authorsService.getAuthors().subscribe(
+        (data: IAuthor[]): void => {
+          this.authors = data;
+        }
+      )
+    );
   }
 
   ngOnDestroy() {
-    if (this.getCourseByIdSubscription) {
-      this.getCourseByIdSubscription.unsubscribe();
+    for (const subscription of this.subscriptionsHeap) {
+      subscription.unsubscribe();
     }
   }
 
@@ -81,12 +93,12 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
   }
 
   getCourseById(id: number): void {
-    this.getCourseByIdSubscription = this.coursesService
-      .getCourseById(id)
-      .subscribe(
+    this.subscriptionsHeap.push(
+      this.coursesService.getCourseById(id).subscribe(
         (data: ICourse): void => {
           this.courseForm.patchValue(data);
         }
-      );
+      )
+    );
   }
 }

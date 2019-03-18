@@ -9,3 +9,9 @@ export const NO_DATA_PLACEHOLDER = 'No data. Feel free to add new one.';
 const PORT = 3000;
 
 export const BACK_URL = `http://localhost:${PORT}/api`;
+
+export const BACK_API_MAP = {
+  auth: 'auth',
+  authors: 'authors',
+  courses: 'courses'
+};

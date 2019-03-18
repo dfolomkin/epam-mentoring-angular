@@ -3,6 +3,18 @@
     { "login": "admin", "password": "123456" },
     { "login": "user", "password": "123456" }
   ],
+  "authors": [
+    { "id": 1, "name": "Lotta Beggini", "rating": 4 },
+    { "id": 2, "name": "Ladonna Gisborne", "rating": 1 },
+    { "id": 3, "name": "Chucho Ginley", "rating": 1 },
+    { "id": 4, "name": "Allis Jerrand", "rating": 5 },
+    { "id": 5, "name": "Tessa Quiddington", "rating": 3 },
+    { "id": 6, "name": "Lacee Piborn", "rating": 1 },
+    { "id": 7, "name": "Lida MacGaughey", "rating": 1 },
+    { "id": 8, "name": "Reynolds Bysaker", "rating": 4 },
+    { "id": 9, "name": "Brynn Rubin", "rating": 2 },
+    { "id": 10, "name": "Harriot Moar", "rating": 4 }
+  ],
   "courses": [
     {
       "id": 1,

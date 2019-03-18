@@ -7,6 +7,7 @@ import { CourseEditFormComponent } from './course-edit-form.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { CustomPipesModule } from 'src/app/commons/pipes/custom-pipes.module';
 import { CoursesService } from 'src/app/components/courses/services/courses.service';
+import { AuthorsService } from 'src/app/commons/services/authors.service';
 
 @NgModule({
   declarations: [CourseEditFormComponent],
@@ -18,6 +19,6 @@ import { CoursesService } from 'src/app/components/courses/services/courses.serv
   ],
   exports: [CourseEditFormComponent],
   bootstrap: [CourseEditFormComponent],
-  providers: [CoursesService]
+  providers: [CoursesService, AuthorsService]
 })
 export class CourseEditFormModule {}

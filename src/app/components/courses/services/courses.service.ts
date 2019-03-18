@@ -6,7 +6,7 @@ import { max } from 'lodash';
 
 import { ICourse } from '../interfaces/courses.interface';
 import { LoaderService } from 'src/app/commons/services/loader.service';
-import { BACK_URL, ROUTES_MAP } from 'src/app/commons/constants';
+import { BACK_URL, BACK_API_MAP } from 'src/app/commons/constants';
 
 export const getNewId = (courses: ICourse[]): number => {
   const ids = courses && courses.map(item => item.id);
@@ -23,7 +23,7 @@ export class CoursesService {
   getCourses(): Observable<ICourse[]> {
     this.loaderService.showLoader();
 
-    return this.http.get<ICourse[]>(`${BACK_URL}/${ROUTES_MAP.courses}`).pipe(
+    return this.http.get<ICourse[]>(`${BACK_URL}/${BACK_API_MAP.courses}`).pipe(
       retry(3),
       catchError((err: HttpErrorResponse) => {
         console.error(err.error);
@@ -36,7 +36,7 @@ export class CoursesService {
   }
 
   getCoursesServerCount(): Observable<number> {
-    return this.http.get<number>(`${BACK_URL}/${ROUTES_MAP.courses}/count`);
+    return this.http.get<number>(`${BACK_URL}/${BACK_API_MAP.courses}/count`);
   }
 
   getCoursesByParams(
@@ -48,7 +48,7 @@ export class CoursesService {
 
     return this.http
       .get<ICourse[]>(
-        `${BACK_URL}/${ROUTES_MAP.courses}?${
+        `${BACK_URL}/${BACK_API_MAP.courses}?${
           query ? 'query=' + query + '&' : ''
         }start=${start}&count=${count}`
       )
@@ -68,7 +68,7 @@ export class CoursesService {
     this.loaderService.showLoader();
 
     return this.http
-      .get<ICourse | {}>(`${BACK_URL}/${ROUTES_MAP.courses}/${id}`)
+      .get<ICourse | {}>(`${BACK_URL}/${BACK_API_MAP.courses}/${id}`)
       .pipe(
         retry(3),
         catchError((err: HttpErrorResponse) => {
@@ -85,7 +85,7 @@ export class CoursesService {
     this.loaderService.showLoader();
 
     return this.http
-      .delete<any>(`${BACK_URL}/${ROUTES_MAP.courses}/${id}`)
+      .delete<any>(`${BACK_URL}/${BACK_API_MAP.courses}/${id}`)
       .pipe(
         finalize(() => {
           this.loaderService.hideLoader();
@@ -99,7 +99,7 @@ export class CoursesService {
         const newCourse = { id: getNewId(courses), ...course };
 
         return this.http.post<any>(
-          `${BACK_URL}/${ROUTES_MAP.courses}`,
+          `${BACK_URL}/${BACK_API_MAP.courses}`,
           newCourse
         );
       }),
@@ -116,7 +116,7 @@ export class CoursesService {
     this.loaderService.showLoader();
 
     return this.http
-      .put<any>(`${BACK_URL}/${ROUTES_MAP.courses}/${course.id}`, course)
+      .put<any>(`${BACK_URL}/${BACK_API_MAP.courses}/${course.id}`, course)
       .pipe(
         finalize(() => {
           this.loaderService.hideLoader();
