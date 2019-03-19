@@ -8,9 +8,10 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { CustomPipesModule } from 'src/app/commons/pipes/custom-pipes.module';
 import { CoursesService } from 'src/app/components/courses/services/courses.service';
 import { AuthorsService } from 'src/app/commons/services/authors.service';
+import { IsNumberValidatorDirective } from './validators/is-number.directive';
 
 @NgModule({
-  declarations: [CourseEditFormComponent],
+  declarations: [CourseEditFormComponent, IsNumberValidatorDirective],
   imports: [
     CommonModule,
     ReactiveFormsModule,

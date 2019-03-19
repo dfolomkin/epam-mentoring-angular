@@ -42,7 +42,7 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
       Validators.required,
       hasCorrectDateFormat(/^\d{2}\/\d{2}\/\d{4}$/)
     ]),
-    duration: new FormControl(0, [Validators.required, isNumberValidator])
+    duration: new FormControl(0, [Validators.required])
   });
 
   get title() {

@@ -50,6 +50,7 @@
       placeholder="Duration"
       type="text"
       formControlName="duration"
+      appIsNumber
       [class.alert]="duration.errors?.NaN"
     />
     {{ courseForm.value.duration | duration }}
