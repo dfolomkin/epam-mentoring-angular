@@ -1,14 +1,21 @@
 <form class="course-edit-form" [formGroup]="courseForm">
   <div class="control-group">
+    <span *ngIf="title.errors" class="validator-alert">
+      required, 50 symbols max
+    </span>
     <label for="form_title">Title:</label>
     <input
       id="form_title"
       placeholder="Title"
       type="text"
       formControlName="title"
+      [class.alert]="title.errors"
     />
   </div>
   <div class="control-group">
+    <span *ngIf="description.errors" class="validator-alert">
+      required, 500 symbols max
+    </span>
     <label for="form_description">Description:</label>
     <textarea
       id="form_description"
@@ -17,11 +24,12 @@
       class="materialize-textarea"
       rows="3"
       formControlName="description"
+      [class.alert]="description.errors"
     ></textarea>
   </div>
   <div class="control-group">
     <span *ngIf="date.errors?.forbiddenDateFormat" class="validator-alert">
-      Format should be dd/mm/yyyy.
+      required, format should be dd/mm/yyyy
     </span>
     <label for="form_date">Date:</label>
     <input
@@ -29,20 +37,20 @@
       placeholder="Date"
       type="text"
       formControlName="date"
-      [class.input-alert]="date.errors?.forbiddenDateFormat"
+      [class.alert]="date.errors?.forbiddenDateFormat"
     />
   </div>
   <div class="control-group">
     <label for="form_duration">Duration:</label>
     <span *ngIf="duration.errors?.NaN" class="validator-alert">
-      Only numbers are allowed.
+      required, only numbers are allowed
     </span>
     <input
       id="form_duration"
       placeholder="Duration"
       type="text"
       formControlName="duration"
-      [class.input-alert]="duration.errors?.NaN"
+      [class.alert]="duration.errors?.NaN"
     />
     {{ courseForm.value.duration | duration }}
   </div>
@@ -68,7 +76,9 @@
       type="button"
       class="btn waves-effect waves-light"
       (click)="onSaveClick()"
-      [disabled]="date.errors || duration.errors"
+      [disabled]="
+        title.errors || description.errors || date.errors || duration.errors
+      "
     >
       Save
     </button>

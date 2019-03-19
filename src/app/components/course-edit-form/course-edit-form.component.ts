@@ -12,8 +12,8 @@ import {
 } from 'src/app/components/courses/actions/courses.action';
 import { CoursesService } from 'src/app/components/courses/services/courses.service';
 import { ROUTES_MAP } from 'src/app/commons/constants';
-import { isNumberValidator } from './validators/is-number.validator';
 import { hasCorrectDateFormat } from './validators/has-correct-date-format.validator';
+import { isNumberValidator } from './validators/is-number.validator';
 import { AuthorsService } from 'src/app/commons/services/authors.service';
 import { IAuthor } from 'src/app/commons/interfaces/author.interface';
 
@@ -45,12 +45,20 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
     duration: new FormControl(0, [Validators.required, isNumberValidator])
   });
 
-  get duration() {
-    return this.courseForm.get('duration');
+  get title() {
+    return this.courseForm.get('title');
+  }
+
+  get description() {
+    return this.courseForm.get('description');
   }
 
   get date() {
     return this.courseForm.get('date');
+  }
+
+  get duration() {
+    return this.courseForm.get('duration');
   }
 
   constructor(
@@ -69,6 +77,7 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
       this.isNew = true;
     }
 
+    this.subscriptionsHeap = [];
     this.subscriptionsHeap.push(
       this.authorsService.getAuthors().subscribe(
         (data: IAuthor[]): void => {
