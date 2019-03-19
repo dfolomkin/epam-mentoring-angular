@@ -1,0 +1,32 @@
+<div class="cloud-tags-wrapper">
+  <span *ngIf="itemControl.errors" class="validator-alert">
+    at least one item required
+  </span>
+  <input
+    placeholder="Start to enter item name"
+    type="text"
+    class="cloud-tags-input"
+    [class.control-alert]="itemControl.errors"
+    [formControl]="itemControl"
+    (keyup)="onInputKeyUp($event)"
+  />
+
+  <ul class="dropdownList">
+    <li
+      *ngFor="let item of proposedItems; let i = index"
+      class="dropdownList_item"
+      [class.dropdownList_selectedItem]="i === currentProposedItemIndex"
+    >
+      {{ item[prop] }}
+    </li>
+  </ul>
+</div>
+
+<div>
+  <app-tag
+    *ngFor="let item of selectedItems"
+    [item]="item"
+    [prop]="prop"
+    (clickDeleteEvent)="onDeleteClick($event)"
+  ></app-tag>
+</div>

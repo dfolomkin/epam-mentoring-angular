@@ -12,7 +12,7 @@ import {
 } from 'src/app/components/courses/actions/courses.action';
 import { CoursesService } from 'src/app/components/courses/services/courses.service';
 import { ROUTES_MAP } from 'src/app/commons/constants';
-import { hasCorrectDateFormat } from './validators/has-correct-date-format.validator';
+import { hasCorrectDateFormatValidator } from './validators/has-correct-date-format.validator';
 import { isNumberValidator } from './validators/is-number.validator';
 import { AuthorsService } from 'src/app/commons/services/authors.service';
 import { IAuthor } from 'src/app/commons/interfaces/author.interface';
@@ -25,6 +25,7 @@ import { IAuthor } from 'src/app/commons/interfaces/author.interface';
 export class CourseEditFormComponent implements OnInit, OnDestroy {
   isNew: boolean;
   authors: IAuthor[];
+  selectedAuthors: IAuthor[];
 
   subscriptionsHeap: Subscription[];
 
@@ -37,12 +38,12 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
       Validators.required,
       Validators.maxLength(500)
     ]),
-    author: new FormControl('', [Validators.required]),
     date: new FormControl(this.nowDate, [
       Validators.required,
-      hasCorrectDateFormat(/^\d{2}\/\d{2}\/\d{4}$/)
+      hasCorrectDateFormatValidator(/^\d{2}\/\d{2}\/\d{4}$/)
     ]),
-    duration: new FormControl(0, [Validators.required])
+    duration: new FormControl(0, [Validators.required]),
+    author: new FormControl('', [Validators.required])
   });
 
   get title() {
@@ -59,6 +60,10 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
 
   get duration() {
     return this.courseForm.get('duration');
+  }
+
+  get author() {
+    return this.courseForm.get('author');
   }
 
   constructor(
@@ -99,6 +104,16 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
     } else {
       this.store$.dispatch(new UpdateCourse(this.courseForm.value));
     }
+  }
+
+  onAuthorsChange(items): void {
+    this.selectedAuthors = items;
+
+    const authorNamesString = this.selectedAuthors
+      .map(item => item.name)
+      .join(', ');
+
+    this.author.setValue(authorNamesString);
   }
 
   getCourseById(id: number): void {

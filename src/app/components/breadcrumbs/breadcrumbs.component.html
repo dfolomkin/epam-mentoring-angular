@@ -5,10 +5,4 @@
     [routerLink]="!isLast ? '/' + chunk.toLowerCase() : ''"
     >{{ chunk }} <span *ngIf="!isLast">/ </span>
   </a>
-  <!-- <a
-    *ngIf="authService.isAuthed()"
-    routerLink="/course-edit"
-    routerLinkActive="active"
-    >Course-edit</a
-  > -->
 </nav>

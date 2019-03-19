@@ -1,5 +1,5 @@
 <div class="header">
-  <div class="header__logo"><app-logo brand="Courses"></app-logo></div>
+  <div class="header__logo"><app-logo [brand]="'Courses'"></app-logo></div>
   <div class="header__control-bar">
     <span *ngIf="(login$ | async) as login" class="header__control">{{
       login

@@ -8,6 +8,7 @@ html {
 @clr-light-violet: #ac96d2;
 @clr-dark-violet: #7c61aa;
 @clr-green: #4a8756;
+@clr-red: #e10600;
 @clr-coral: #ff7062;
 @clr-light-coral: #ff9489;
 @clr-white: #fff;
@@ -51,4 +52,15 @@ html {
   pointer-events: none;
   cursor: default;
   opacity: 0.6;
+}
+
+.validator-alert {
+  float: right;
+  font-size: 1.2em;
+  color: @clr-red;
+}
+
+.control-alert {
+  border-bottom-width: 2px !important;
+  border-bottom-color: @clr-red !important;
 }

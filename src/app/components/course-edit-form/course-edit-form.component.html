@@ -9,7 +9,7 @@
       placeholder="Title"
       type="text"
       formControlName="title"
-      [class.alert]="title.errors"
+      [class.control-alert]="title.errors"
     />
   </div>
   <div class="control-group">
@@ -24,7 +24,7 @@
       class="materialize-textarea"
       rows="3"
       formControlName="description"
-      [class.alert]="description.errors"
+      [class.control-alert]="description.errors"
     ></textarea>
   </div>
   <div class="control-group">
@@ -37,7 +37,7 @@
       placeholder="Date"
       type="text"
       formControlName="date"
-      [class.alert]="date.errors?.forbiddenDateFormat"
+      [class.control-alert]="date.errors?.incorrectDateFormat"
     />
   </div>
   <div class="control-group">
@@ -51,7 +51,7 @@
       type="text"
       formControlName="duration"
       appIsNumber
-      [class.alert]="duration.errors?.NaN"
+      [class.control-alert]="duration.errors?.NaN"
     />
     {{ courseForm.value.duration | duration }}
   </div>
@@ -63,6 +63,15 @@
       type="text"
       formControlName="author"
     />
+  </div>
+
+  <div class="control-group">
+    <label>Authors:</label>
+    <app-cloud-tags-input
+      [items]="authors"
+      [prop]="'name'"
+      (itemsChangeEvent)="onAuthorsChange($event)"
+    ></app-cloud-tags-input>
   </div>
 
   <div class="control-group control-group-row">
@@ -78,7 +87,11 @@
       class="btn waves-effect waves-light"
       (click)="onSaveClick()"
       [disabled]="
-        title.errors || description.errors || date.errors || duration.errors
+        title.errors ||
+        description.errors ||
+        date.errors ||
+        duration.errors ||
+        author.errors
       "
     >
       Save
