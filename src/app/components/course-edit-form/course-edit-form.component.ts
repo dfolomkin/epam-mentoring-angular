@@ -33,11 +33,8 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
 
   courseForm = new FormGroup({
     id: new FormControl(0),
-    title: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-    description: new FormControl('', [
-      Validators.required,
-      Validators.maxLength(500)
-    ]),
+    title: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
     date: new FormControl(this.nowDate, [
       Validators.required,
       hasCorrectDateFormatValidator(/^\d{2}\/\d{2}\/\d{4}$/)
@@ -90,6 +87,14 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
         }
       )
     );
+
+    this.title.valueChanges.subscribe(value => {
+      this.title.setValidators([Validators.maxLength(50)]);
+    });
+
+    this.description.valueChanges.subscribe(value => {
+      this.description.setValidators([Validators.maxLength(500)]);
+    });
   }
 
   ngOnDestroy() {

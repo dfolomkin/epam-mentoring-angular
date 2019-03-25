@@ -59,3 +59,7 @@ select is viable only if we need more complex selection logic, isn't it?
 how to organize events through app without ngrx, emit/broadcast?
 
 project structure for ngrx store/effects?
+
+how to get error from the sub-component (cloud-tags-input)?
+
+how to use generic type in cloud-tags-input insted of Object[]?
