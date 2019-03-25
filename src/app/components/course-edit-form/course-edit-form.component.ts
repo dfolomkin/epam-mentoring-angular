@@ -33,7 +33,7 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
 
   courseForm = new FormGroup({
     id: new FormControl(0),
-    title: new FormControl('', [Validators.required]),
+    title: new FormControl(''),
     description: new FormControl('', [Validators.required]),
     date: new FormControl(this.nowDate, [
       Validators.required,
@@ -89,7 +89,8 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
     );
 
     this.title.valueChanges.subscribe(value => {
-      this.title.setValidators([Validators.maxLength(50)]);
+      // this.title.setValidators([Validators.maxLength(50)]);
+      console.log(value);
     });
 
     this.description.valueChanges.subscribe(value => {

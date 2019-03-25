@@ -1,17 +1,5 @@
 <form class="course-edit-form" [formGroup]="courseForm">
-  <div class="control-group">
-    <span *ngIf="title.errors" class="validator-alert">
-      required, 50 symbols max
-    </span>
-    <label for="form_title">Title:</label>
-    <input
-      id="form_title"
-      placeholder="Title"
-      type="text"
-      formControlName="title"
-      [class.control-alert]="title.errors"
-    />
-  </div>
+  <app-title-control formControlName="title"></app-title-control>
   <div class="control-group">
     <span *ngIf="description.errors" class="validator-alert">
       required, 500 symbols max
@@ -87,11 +75,7 @@
       class="btn waves-effect waves-light"
       (click)="onSaveClick()"
       [disabled]="
-        title.errors ||
-        description.errors ||
-        date.errors ||
-        duration.errors ||
-        author.errors
+        description.errors || date.errors || duration.errors || author.errors
       "
     >
       Save

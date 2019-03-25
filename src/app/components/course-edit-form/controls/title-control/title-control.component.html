@@ -1,0 +1,13 @@
+<div class="control-group">
+  <span *ngIf="_control.errors" class="validator-alert">
+    required, 50 symbols max
+  </span>
+  <label for="form_title">Title:</label>
+  <input
+    id="form_title"
+    placeholder="Title"
+    type="text"
+    [formControl]="_control"
+    [class.control-alert]="_control.errors"
+  />
+</div>

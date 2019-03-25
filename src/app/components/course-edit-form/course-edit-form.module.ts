@@ -10,6 +10,7 @@ import { CoursesService } from 'src/app/components/courses/services/courses.serv
 import { AuthorsService } from 'src/app/commons/services/authors.service';
 import { IsNumberValidatorDirective } from './validators/is-number.directive';
 import { CloudTagsInputModule } from 'src/app/components/cloud-tags-input/cloud-tags-input.module';
+import { ControlsModule } from './controls/controls.module';
 
 @NgModule({
   declarations: [CourseEditFormComponent, IsNumberValidatorDirective],
@@ -18,7 +19,8 @@ import { CloudTagsInputModule } from 'src/app/components/cloud-tags-input/cloud-
     ReactiveFormsModule,
     AppRoutingModule,
     CustomPipesModule,
-    CloudTagsInputModule
+    CloudTagsInputModule,
+    ControlsModule
   ],
   exports: [CourseEditFormComponent],
   bootstrap: [CourseEditFormComponent],

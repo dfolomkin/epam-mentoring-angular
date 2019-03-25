@@ -10,6 +10,7 @@ import { CanActivateGuard } from './guards/can-activate.guard';
 import { CanLoadGuard } from './guards/can-load.guard';
 
 const routes: Routes = [
+  { path: '', redirectTo: `/${ROUTES_MAP.courses}`, pathMatch: 'full' },
   { path: ROUTES_MAP.courses, component: CoursesComponent },
   {
     path: `${ROUTES_MAP.courses}/:id`,
@@ -18,7 +19,6 @@ const routes: Routes = [
     canLoad: [CanLoadGuard]
   },
   { path: ROUTES_MAP.auth, component: AuthContainerComponent },
-  { path: '', redirectTo: `/${ROUTES_MAP.courses}`, pathMatch: 'full' },
   { path: '**', component: NotFoundComponent }
 ];
 
