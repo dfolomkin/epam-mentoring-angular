@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { remove, isEqual } from 'lodash';
+import { Subject } from 'rxjs';
 
 import { hasAtLeastOneItemValidator } from './validators/has-at-least-one-item.validator';
 
@@ -29,10 +30,13 @@ export class CloudTagsInputComponent implements OnInit, OnDestroy {
   elem: HTMLElement;
   upDownHandler: (event: KeyboardEvent) => void;
   selectedItems: Object[];
+  selectedItemsSubject = new Subject<Object[]>();
   proposedItems: Object[];
   currentProposedItemIndex: number;
 
-  itemControl = new FormControl('');
+  itemControl = new FormControl('', [
+    hasAtLeastOneItemValidator(this.selectedItems || [])
+  ]);
 
   constructor() {}
 
@@ -41,10 +45,18 @@ export class CloudTagsInputComponent implements OnInit, OnDestroy {
     this.proposedItems = [];
     this.currentProposedItemIndex = 0;
 
+    // TODO: don't need this at all
     this.itemControl.valueChanges.subscribe(value => {
-      this.itemControl.setValidators([
+      this.itemControl.setValidators(
         hasAtLeastOneItemValidator(this.selectedItems)
-      ]);
+      );
+    });
+
+    this.selectedItemsSubject.subscribe(items => {
+      console.log(items);
+      this.selectedItems = items;
+      this.itemControl.setValidators(hasAtLeastOneItemValidator(items));
+      this.itemsChangeEvent.emit(items);
     });
 
     // prevent up/down keys for input
@@ -118,8 +130,7 @@ export class CloudTagsInputComponent implements OnInit, OnDestroy {
       );
 
       if (item && isUnique) {
-        this.selectedItems.push(item);
-        this.itemsChangeEvent.emit(this.selectedItems);
+        this.selectedItemsSubject.next([...this.selectedItems, item]);
       }
 
       this.itemControl.setValue('');
@@ -129,7 +140,8 @@ export class CloudTagsInputComponent implements OnInit, OnDestroy {
   }
 
   onDeleteClick(item) {
-    remove(this.selectedItems, i => isEqual(i, item));
-    this.itemsChangeEvent.emit(this.selectedItems);
+    const items = this.selectedItems;
+    remove(items, i => isEqual(i, item));
+    this.selectedItemsSubject.next(items);
   }
 }
