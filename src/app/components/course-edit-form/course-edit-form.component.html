@@ -1,48 +1,21 @@
 <form class="course-edit-form" [formGroup]="courseForm">
-  <app-title-control formControlName="title"></app-title-control>
-  <div class="control-group">
-    <span *ngIf="description.errors" class="validator-alert">
-      required, 500 symbols max
-    </span>
-    <label for="form_description">Description:</label>
-    <textarea
-      id="form_description"
-      placeholder="Decription"
-      type="text"
-      class="materialize-textarea"
-      rows="3"
-      formControlName="description"
-      [class.control-alert]="description.errors"
-    ></textarea>
-  </div>
-  <div class="control-group">
-    <span *ngIf="date.errors?.forbiddenDateFormat" class="validator-alert">
-      required, format should be dd/mm/yyyy
-    </span>
-    <label for="form_date">Date:</label>
-    <input
-      id="form_date"
-      placeholder="Date"
-      type="text"
-      formControlName="date"
-      [class.control-alert]="date.errors?.incorrectDateFormat"
-    />
-  </div>
-  <div class="control-group">
-    <label for="form_duration">Duration:</label>
-    <span *ngIf="duration.errors?.NaN" class="validator-alert">
-      required, only numbers are allowed
-    </span>
-    <input
-      id="form_duration"
-      placeholder="Duration"
-      type="text"
-      formControlName="duration"
-      appIsNumber
-      [class.control-alert]="duration.errors?.NaN"
-    />
-    {{ courseForm.value.duration | duration }}
-  </div>
+  <app-title-control
+    formControlName="title"
+    (errorsRaiseEvent)="onErrorsRaise($event)"
+  ></app-title-control>
+  <app-description-control
+    formControlName="description"
+    (errorsRaiseEvent)="onErrorsRaise($event)"
+  ></app-description-control>
+  <app-date-control
+    formControlName="date"
+    (errorsRaiseEvent)="onErrorsRaise($event)"
+  ></app-date-control>
+  <app-duration-control
+    formControlName="duration"
+    (errorsRaiseEvent)="onErrorsRaise($event)"
+  ></app-duration-control>
+
   <div class="control-group">
     <label for="form_author">Author:</label>
     <input
@@ -74,9 +47,7 @@
       type="button"
       class="btn waves-effect waves-light"
       (click)="onSaveClick()"
-      [disabled]="
-        description.errors || date.errors || duration.errors || author.errors
-      "
+      [disabled]="title.errors"
     >
       Save
     </button>

@@ -36,7 +36,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   searchQuery$: Observable<string>;
   dataCount$: Observable<number>;
 
-  subscriptionsHeap: Subscription[];
+  subscriptionsHeap: Subscription[] = [];
 
   noDataPlaceholder = NO_DATA_PLACEHOLDER;
 
@@ -52,7 +52,6 @@ export class CoursesListComponent implements OnInit, OnDestroy {
     );
     this.dataCount$ = this.store$.pipe(select(getDataCount));
 
-    this.subscriptionsHeap = [];
     this.subscriptionsHeap.push(
       this.store$
         .pipe(select(getDataChunkSize))

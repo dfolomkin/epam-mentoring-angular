@@ -19,12 +19,11 @@ export class LoadMoreButtonComponent implements OnInit, OnDestroy {
   dataChunkSize: DataChunkSize;
   dataCount: number;
 
-  subscriptionsHeap: Subscription[];
+  subscriptionsHeap: Subscription[] = [];
 
   constructor(private store$: Store<IAppState>) {}
 
   ngOnInit() {
-    this.subscriptionsHeap = [];
     this.subscriptionsHeap.push(
       this.store$
         .pipe(select(getDataChunkSize))

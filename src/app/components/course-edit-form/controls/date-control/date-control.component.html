@@ -1,3 +1,19 @@
-<p>
-  date-control works!
-</p>
+<div class="control-group">
+  <span *ngIf="date.errors?.required" class="validator-alert">
+    required
+  </span>
+  <span
+    *ngIf="date.errors?.incorrectDateFormat && !date.errors?.required"
+    class="validator-alert"
+  >
+    format should be dd/mm/yyyy
+  </span>
+  <label for="form_date">Date:</label>
+  <input
+    id="form_date"
+    placeholder="Date"
+    type="text"
+    [formControl]="date"
+    [class.control-alert]="date.errors"
+  />
+</div>

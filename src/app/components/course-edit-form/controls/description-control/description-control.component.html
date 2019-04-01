@@ -1,3 +1,18 @@
-<p>
-  description-control works!
-</p>
+<div class="control-group">
+  <span *ngIf="description.errors?.required" class="validator-alert">
+    required
+  </span>
+  <span *ngIf="description.errors?.maxlength" class="validator-alert">
+    {{ description.errors?.maxlength.requiredLength }} symbols max
+  </span>
+  <label for="form_description">Description:</label>
+  <textarea
+    id="form_description"
+    placeholder="Decription"
+    type="text"
+    class="materialize-textarea"
+    rows="3"
+    [formControl]="description"
+    [class.control-alert]="description.errors"
+  ></textarea>
+</div>

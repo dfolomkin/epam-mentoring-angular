@@ -6,16 +6,15 @@ import { Store } from '@ngrx/store';
 
 import { IAppState } from 'src/app/app.state';
 import { ICourse } from 'src/app/components/courses/interfaces/courses.interface';
+import { IAuthor } from 'src/app/commons/interfaces/author.interface';
+import { IErrorsRaiseEvent } from 'src/app/commons/interfaces/errorsRaiseEvent.interface';
 import {
   CreateCourse,
   UpdateCourse
 } from 'src/app/components/courses/actions/courses.action';
 import { CoursesService } from 'src/app/components/courses/services/courses.service';
-import { ROUTES_MAP } from 'src/app/commons/constants';
-import { hasCorrectDateFormatValidator } from './validators/has-correct-date-format.validator';
-import { isNumberValidator } from './validators/is-number.validator';
 import { AuthorsService } from 'src/app/commons/services/authors.service';
-import { IAuthor } from 'src/app/commons/interfaces/author.interface';
+import { ROUTES_MAP } from 'src/app/commons/constants';
 
 @Component({
   selector: 'app-course-edit-form',
@@ -27,19 +26,16 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
   authors: IAuthor[];
   selectedAuthors: IAuthor[];
 
-  subscriptionsHeap: Subscription[];
+  subscriptionsHeap: Subscription[] = [];
 
   private nowDate = new Date().toLocaleDateString('ru-RU').replace(/\./g, '/');
 
   courseForm = new FormGroup({
     id: new FormControl(0),
     title: new FormControl(''),
-    description: new FormControl('', [Validators.required]),
-    date: new FormControl(this.nowDate, [
-      Validators.required,
-      hasCorrectDateFormatValidator(/^\d{2}\/\d{2}\/\d{4}$/)
-    ]),
-    duration: new FormControl(0, [Validators.required]),
+    description: new FormControl(''),
+    date: new FormControl(this.nowDate),
+    duration: new FormControl(0),
     author: new FormControl('', [Validators.required])
   });
 
@@ -79,7 +75,6 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
       this.isNew = true;
     }
 
-    this.subscriptionsHeap = [];
     this.subscriptionsHeap.push(
       this.authorsService.getAuthors().subscribe(
         (data: IAuthor[]): void => {
@@ -87,15 +82,6 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
         }
       )
     );
-
-    this.title.valueChanges.subscribe(value => {
-      // this.title.setValidators([Validators.maxLength(50)]);
-      console.log(value);
-    });
-
-    this.description.valueChanges.subscribe(value => {
-      this.description.setValidators([Validators.maxLength(500)]);
-    });
   }
 
   ngOnDestroy() {
@@ -120,6 +106,10 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
       .join(', ');
 
     this.author.setValue(authorNamesString);
+  }
+
+  onErrorsRaise(event: IErrorsRaiseEvent): void {
+    this[event.formControlName].setErrors(event.errors);
   }
 
   getCourseById(id: number): void {

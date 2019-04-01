@@ -1,3 +1,17 @@
-<p>
-  duration-control works!
-</p>
+<div class="control-group">
+  <label for="form_duration">Duration:</label>
+  <span *ngIf="duration.errors?.required" class="validator-alert">
+    required
+  </span>
+  <span *ngIf="duration.errors?.NaN" class="validator-alert">
+    only numbers are allowed
+  </span>
+  <input
+    id="form_duration"
+    placeholder="Duration"
+    type="text"
+    [formControl]="duration"
+    [class.control-alert]="duration.errors"
+  />
+  {{ duration.value | duration }}
+</div>

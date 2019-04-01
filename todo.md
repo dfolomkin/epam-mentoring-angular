@@ -23,6 +23,7 @@ remove filter
 remove sort pipe, implement server sort
 
 change author interface to array
+check autofill tags on edit
 
 # QUESTIONS and KNOWLEDGE GAPS
 

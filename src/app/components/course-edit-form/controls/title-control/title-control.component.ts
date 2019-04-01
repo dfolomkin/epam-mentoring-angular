@@ -1,10 +1,21 @@
-import { Component, forwardRef, HostListener } from '@angular/core';
+import {
+  Component,
+  forwardRef,
+  HostListener,
+  OnInit,
+  OnDestroy,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
   FormControl,
   Validators
 } from '@angular/forms';
+import { Subscription } from 'rxjs';
+
+import { IErrorsRaiseEvent } from 'src/app/commons/interfaces/errorsRaiseEvent.interface';
 
 @Component({
   selector: 'app-title-control',
@@ -18,45 +29,52 @@ import {
     }
   ]
 })
-export class TitleControlComponent implements ControlValueAccessor {
+export class TitleControlComponent
+  implements ControlValueAccessor, OnInit, OnDestroy {
+  subscription: Subscription;
+
   onChange: Function;
 
   onTouched: Function;
 
-  // this init value is ignored by top level control value
-  _control = new FormControl('', [
-    Validators.required,
-    Validators.maxLength(50)
-  ]);
+  title = new FormControl('');
 
-  get value(): string {
-    return this._control.value;
+  @Output()
+  errorsRaiseEvent = new EventEmitter<IErrorsRaiseEvent>();
+
+  ngOnInit() {
+    this.subscription = this.title.valueChanges.subscribe(value => {
+      if (this.onChange) {
+        this.onChange(value);
+      }
+      if (this.title.errors) {
+        this.errorsRaiseEvent.emit({
+          formControlName: 'title',
+          errors: this.title.errors
+        });
+      }
+    });
   }
 
-  set value(value: string) {
-    this._control.setValue(value);
-    if (this.onChange) {
-      this.onChange(value);
-    }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   @HostListener('click') click() {
     if (this.onTouched) {
       this.onTouched();
     }
+    this.title.setValidators([Validators.required, Validators.maxLength(50)]);
+    this.title.updateValueAndValidity();
   }
 
-  writeValue(obj: any): void {
-    this.value = obj;
+  writeValue(value: any): void {
+    this.title.setValue(value);
   }
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
-
-  // this.title.valueChanges.subscribe(value => {
-  //   this.title.setValidators([Validators.maxLength(50)]);
-  // });
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
