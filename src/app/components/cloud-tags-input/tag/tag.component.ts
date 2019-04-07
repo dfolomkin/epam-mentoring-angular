@@ -7,10 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class TagComponent implements OnInit {
   @Input()
-  item: Object;
-
-  @Input()
-  prop: string;
+  item: string;
 
   @Output()
   clickDeleteEvent = new EventEmitter();

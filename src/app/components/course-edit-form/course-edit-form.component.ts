@@ -23,7 +23,7 @@ import { ROUTES_MAP } from 'src/app/commons/constants';
 })
 export class CourseEditFormComponent implements OnInit, OnDestroy {
   isNew: boolean;
-  authors: IAuthor[];
+  authorsList: string[];
   selectedAuthors: IAuthor[];
 
   subscriptionsHeap: Subscription[] = [];
@@ -36,7 +36,7 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
     description: new FormControl(''),
     date: new FormControl(this.nowDate),
     duration: new FormControl(0),
-    author: new FormControl('', [Validators.required])
+    author: new FormControl('')
   });
 
   get title() {
@@ -78,7 +78,7 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
     this.subscriptionsHeap.push(
       this.authorsService.getAuthors().subscribe(
         (data: IAuthor[]): void => {
-          this.authors = data;
+          this.authorsList = data.map(item => item.name);
         }
       )
     );
@@ -96,16 +96,6 @@ export class CourseEditFormComponent implements OnInit, OnDestroy {
     } else {
       this.store$.dispatch(new UpdateCourse(this.courseForm.value));
     }
-  }
-
-  onAuthorsChange(items): void {
-    this.selectedAuthors = items;
-
-    const authorNamesString = this.selectedAuthors
-      .map(item => item.name)
-      .join(', ');
-
-    this.author.setValue(authorNamesString);
   }
 
   onErrorsRaise(event: IErrorsRaiseEvent): void {

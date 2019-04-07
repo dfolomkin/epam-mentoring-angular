@@ -15,23 +15,12 @@
     formControlName="duration"
     (errorsRaiseEvent)="onErrorsRaise($event)"
   ></app-duration-control>
-
-  <div class="control-group">
-    <label for="form_author">Author:</label>
-    <input
-      id="form_author"
-      placeholder="Author"
-      type="text"
-      formControlName="author"
-    />
-  </div>
-
   <div class="control-group">
     <label>Authors:</label>
     <app-cloud-tags-input
-      [items]="authors"
-      [prop]="'name'"
-      (itemsChangeEvent)="onAuthorsChange($event)"
+      formControlName="author"
+      [itemsPool]="authorsList"
+      (errorsRaiseEvent)="onErrorsRaise($event)"
     ></app-cloud-tags-input>
   </div>
 
@@ -47,7 +36,13 @@
       type="button"
       class="btn waves-effect waves-light"
       (click)="onSaveClick()"
-      [disabled]="title.errors"
+      [disabled]="
+        title.errors ||
+        description.errors ||
+        date.errors ||
+        duration.errors ||
+        author.errors
+      "
     >
       Save
     </button>
